@@ -1,0 +1,2160 @@
+(1)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Management Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  h2 {
+    text-align: center;
+    color: red;
+    font-weight: 900;
+    text-decoration: underline;
+    margin-top: 20px;
+  }
+  form {
+    background: #7ffbff;
+    width: 350px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  .priority input {
+    width: auto;
+    margin-right: 5px;
+  }
+  .button {
+    margin-top: 15px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
+  #submit {
+    background-color: green;
+    margin-right: 10px;
+    font-size: 20px;
+    color: white;
+  }
+  #clear {
+    background-color: blue;
+    font-size: 20px;
+    color: white;
+  }
+  </style>
+</head>
+<body>
+<h2>Project Management</h2>
+<form>
+  <label>Project Name</label>
+  <input type="text" placeholder="Project name" required>
+
+  <label>Assigned To</label>
+  <select>
+    <option>Amresh</option>
+    <option>Gaurav</option>
+    <option>Mitesh</option>
+    <option>Shubham</option>
+  </select>
+
+  <label>Start Date</label>
+  <input type="date" required>
+
+  <label>End Date</label>
+  <input type="date" required>
+
+  <label>Priority</label>
+  <div class="priority">
+    <input type="radio" name="priority" value="high"> High
+    <input type="radio" name="priority" value="average"> Average
+    <input type="radio" name="priority" value="low"> Low
+  </div>
+
+  <label>Description</label>
+  <textarea rows="3" placeholder="Brief description..."></textarea>
+
+  <div class="button">
+ <button id="submit">Submit</button>
+ <button id="clear">Clear</button>
+ </div>
+</form>
+</body>
+</html>
+
+// MongoDB Start Here
+
+1. Model the following Property system as a document database. Consider a
+set of Property, Owner. One owner can buy many properties.
+2. Assume appropriate attributes and collections as per the query requirements.
+3. Insert at least 05 documents in each collection.
+// Owners Collection
+
+owners= _id,name,contact
+properties=name,area,rate,owner_id      
+
+use real_estate DB
+db.owners.insertMany([
+  { _id: 1, name: "Mr.Amresh", contact: "9876543210" },
+  { _id: 2, name: "Ms.Shah", contact: "9876501234" },
+  { _id: 3, name: "Mr.Mitesh", contact: "9876512345" },
+  { _id: 4, name: "Ms.Verma", contact: "9876523456" },
+  { _id: 5, name: "Mr.Shubham", contact: "9876534567" }
+]);
+
+// Properties Collection
+db.properties.insertMany([
+  { name: "Sunshine Villa", area: "Pune", rate: 120000, owner_id: 1 },
+  { name: "Green Acres", area: "Nashik", rate: 90000, owner_id: 2 },
+  { name: "Blue Sky Apartment", area: "Mumbai", rate: 150000, owner_id: 1 },
+  { name: "Lake View", area: "Nashik", rate: 85000, owner_id: 3 },
+  { name: "Palm Residency", area: "Pune", rate: 95000, owner_id: 4 },
+  { name: "Hilltop House", area: "Pune", rate: 70000, owner_id: 5 },
+  { name: "Riverside Villa", area: "Mumbai", rate: 110000, owner_id: 2 }
+]);
+
+4. Answer the following Queries
+a. Display area wise property details.
+db.properties.find({}, { _id: 0, area: 1, rate: 1 })
+
+b. Display property owned by 'Mr.Patil' having minimum rate
+db.properties.find({ owner_id: 1 }).sort({ rate: 1 }).limit(1)
+
+c. Give the details of owner whose property is at “Nashik”.
+option 1 
+db.owners.find({ _id: db.properties.findOne({ area: "Nashik" }).owner_id })
+
+d. Display area of property whose rate is less than 100000.
+db.properties.find({ rate: { $lt: 100000 } }, { _id: 0, area: 1 })
+
+
+
+(2)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 3 Columns Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4 bg-primary text-white text-center p-3">
+        Column 1
+      </div>
+      <div class="col-md-4 bg-success text-white text-center p-3">
+        Column 2
+      </div>
+      <div class="col-md-4 bg-warning text-dark text-center p-3">
+        Column 3
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+// MongoDB Start Here
+
+1. Model the following system as a document database.
+Consider a database of newspaper, publisher, and city.
+Different publisher publishes various newspapers in different cities
+2. Assume appropriate attributes and collections as per the query
+requirements. 
+3. Insert at least 5 documents in each collection.
+
+use News DB
+// Cities Collection= id,name,state
+db.cities.insertMany([
+  { _id: 1, name: "Nashik", state: "Maharashtra" },
+  { _id: 2, name: "Pune", state: "Maharashtra" },
+  { _id: 3, name: "Ahmedabad", state: "Gujarat" },
+  { _id: 4, name: "Surat", state: "Gujarat" },
+  { _id: 5, name: "Mumbai", state: "Maharashtra" }
+]);
+
+// Publishers Collection= id,name
+db.publishers.insertMany([
+  { _id: 1, name: "Times Media" },
+  { _id: 2, name: "Daily Press" },
+  { _id: 3, name: "Gujarat News" },
+  { _id: 4, name: "Maha Media" },
+  { _id: 5, name: "City Chronicle" }
+]);
+
+// Newspapers Collection=name,language,sale,city_id,publisher_id
+db.newspapers.insertMany([
+  { name: "Times of India", language: "English", sale: 50000, city_id: 1, publisher_id: 1 },
+  { name: "Lokmat", language: "Marathi", sale: 40000, city_id: 2, publisher_id: 4 },
+  { name: "Gujarat Samachar", language: "Gujarati", sale: 60000, city_id: 3, publisher_id: 3 },
+  { name: "Daily News", language: "English", sale: 30000, city_id: 4, publisher_id: 2 },
+  { name: "Sakal", language: "Marathi", sale: 45000, city_id: 5, publisher_id: 4 },
+  { name: "Pune Times", language: "English", sale: 35000, city_id: 2, publisher_id: 1 },
+  { name: "Mumbai Mirror", language: "English", sale: 48000, city_id: 5, publisher_id: 5 }
+]);
+
+
+4. Answer the following Queries.
+a. List all newspapers available “NASHIK” city
+db.newspapers.find({ city_id: db.cities.findOne({ name: "Nashik" })._id }, { _id: 0, name: 1 })
+
+b. List all the newspaper of “Marathi” language
+db.newspapers.find({ language: "Marathi" }, { _id: 0, name: 1 })
+
+c. Count no. of publishers of “Gujrat” state
+db.newspapers.countDocuments({ language: "Gujarati" })
+
+d. Write a cursor to show newspapers with highest sale in Maharashtra State
+db.newspapers.find({ city_id: { $in: db.cities.find({ state: "Maharashtra" }).toArray().map(c => c._id) } }).sort({ sales: -1 }).limit(1)
+
+
+
+
+(3)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Image Thumbnails</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Image Thumbnails Gallery</h2>
+ <div class="row g-4">
+      <div class="col-md-4 col-sm-6">
+        <div class="card">
+          <img src="/images/24a158584319d7092059d3ebc53f419c.jpg" class="card-img-top img-thumbnail" alt="Image 1">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 1</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="card">
+          <img src="/images/36af6207d37def406abf4bf8b8b1a54e.jpg" class="card-img-top img-thumbnail" alt="Image 2">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 2</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="card">
+          <img src="/images/18100151_1.jpg" class="card-img-top img-thumbnail" alt="Image 3">
+          <div class="card-body text-center">
+            <p class="card-text">Thumbnail 3</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+// MongoDB Start Here
+
+1. Model the following system as a document database. Consider
+employee and department’s information.
+2. Assume appropriate attributes and collections as per the query
+requirements.
+3. Insert at least 5 documents in each collection.
+
+use clg DB
+// Departments Collection=id,name(dept),location
+db.departments.insertMany([
+  { _id: 1, name: "HR", location: "Mumbai" },
+  { _id: 2, name: "Sales", location: "Pune" },
+  { _id: 3, name: "IT", location: "Nashik" },
+  { _id: 4, name: "Accounts", location: "Nagpur" },
+  { _id: 5, name: "Marketing", location: "Thane" }
+]);
+
+// Employees Collection=name,sal,dept
+db.employees.insertMany([
+  { name: "Ravi", salary: 45000, dept_id: 1 },
+  { name: "Sneha", salary: 55000, dept_id: 2 },
+  { name: "Amit", salary: 75000, dept_id: 3 },
+  { name: "Priya", salary: 60000, dept_id: 2 },
+  { name: "Kiran", salary: 40000, dept_id: 4 },
+  { name: "Rohit", salary: 50000, dept_id: 5 },
+  { name: "Neha", salary: 70000, dept_id: 3 }
+]);
+
+4. Answer the following Queries.
+a. Display name of employee who has highest salary
+db.employees.find().sort({ salary: -1 }).limit(1)
+
+b. Display biggest department with max. no. of employees
+print("Department:", db.departments.findOne({_id: db.employees.aggregate([{ $group:{_id:"$dept_id",c:{$sum:1}} },{$sort:{c:-1}},{$limit:1}]).toArray()[0]._id}).name, "Employees:", d.c)
+
+c. Write a cursor which shows department wise employee information
+db.departments.find().forEach(d=>db.employees.find({dept_id:d._id}).forEach(e=>print(d.name,"-",e.name,"|",e.salary)))
+
+d. List all the employees who work in Sales dept and salary > 50000
+db.employees.find({ dept_id: db.departments.findOne({ name: "Sales" })._id, salary: { $gt: 50000 } })
+
+
+
+
+(4)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Table Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">User Information Table</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Amresh</td>
+          <td>Warad</td>
+          <td>amreshwarad8470@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Priya</td>
+          <td>Sharma</td>
+          <td>priya.sharma@example.com</td>
+        </tr>
+        <tr>
+          <td>Rohit</td>
+          <td>Verma</td>
+          <td>rohitv@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
+
+
+// MongoDB Start Here
+
+1. Model the following information system as a document database.
+
+Consider hospitals around Nashik. Each hospital may have one or more
+specializations like Pediatric, Gynaec, Orthopedic, etc. A person can
+recommend/provide review for a hospital. A doctor can give service to one
+or more hospitals.
+2. Assume appropriate attributes and collections as per the query
+requirements.
+
+3. Insert at least 10 documents in each collection.
+
+use HOS	Hospital DB
+// Hospitals Collection
+db.hospitals.insertMany([
+  { _id: 1, name: "City Care Hospital", city: "Nashik", specialization: ["Pediatric", "Orthopedic"], rating: 4.5 },
+  { _id: 2, name: "Sunrise Hospital", city: "Pune", specialization: ["Gynaec", "Cardiology"], rating: 4.2 },
+  { _id: 3, name: "Wellness Clinic", city: "Nashik", specialization: ["Dermatology"], rating: 3.8 },
+  { _id: 4, name: "Shatayu Hospital", city: "Mumbai", specialization: ["Orthopedic", "Neurology"], rating: 4.7 },
+  { _id: 5, name: "CarePlus Hospital", city: "Nashik", specialization: ["Pediatric", "ENT"], rating: 4.1 },
+  { _id: 6, name: "LifeLine Hospital", city: "Pimpri", specialization: ["Cardiology"], rating: 4.3 },
+  { _id: 7, name: "Niramay Hospital", city: "Nashik", specialization: ["Gynaec"], rating: 3.9 },
+  { _id: 8, name: "Global Hospital", city: "Thane", specialization: ["Orthopedic", "Pediatric"], rating: 4.6 },
+  { _id: 9, name: "Galaxy Hospital", city: "Nashik", specialization: ["Dental"], rating: 3.5 },
+  { _id: 10, name: "Trinity Hospital", city: "Nashik", specialization: ["Neurology"], rating: 4.8 }
+]);
+
+// Doctors Collection
+db.doctors.insertMany([
+  { _id: 1, name: "Dr. Deshmukh", hospital_ids: [1, 5, 7] },
+  { _id: 2, name: "Dr. Patil", hospital_ids: [2, 6] },
+  { _id: 3, name: "Dr. Kale", hospital_ids: [3, 9] },
+  { _id: 4, name: "Dr. Dinesh", hospital_ids: [4, 8] },
+  { _id: 5, name: "Dr. Shinde", hospital_ids: [5, 9] },
+  { _id: 6, name: "Dr. Pande", hospital_ids: [1, 10] },
+  { _id: 7, name: "Dr. More", hospital_ids: [2, 3] },
+  { _id: 8, name: "Dr. Joshi", hospital_ids: [6, 8] },
+  { _id: 9, name: "Dr. Borse", hospital_ids: [4, 7] },
+  { _id: 10, name: "Dr. Jadhav", hospital_ids: [1, 2, 5] }
+]);
+
+// Reviews Collection
+db.reviews.insertMany([
+  { _id: 1, hosp_id: 1, person: "Amit", review: "Excellent service", stars: 5 },
+  { _id: 2, hosp_id: 2, person: "Sneha", review: "Good doctors", stars: 4 },
+  { _id: 3, hosp_id: 3, person: "Ravi", review: "Satisfactory", stars: 3 },
+  { _id: 4, hosp_id: 4, person: "Priya", review: "Very good", stars: 5 },
+  { _id: 5, hosp_id: 5, person: "Tejas", review: "Nice staff", stars: 4 },
+  { _id: 6, hosp_id: 6, person: "Nita", review: "Good care", stars: 4 },
+  { _id: 7, hosp_id: 7, person: "Akash", review: "Average", stars: 3 },
+  { _id: 8, hosp_id: 8, person: "Meena", review: "Highly recommended", stars: 5 },
+  { _id: 9, hosp_id: 9, person: "Rohit", review: "Needs improvement", stars: 2 },
+  { _id: 10, hosp_id: 10, person: "Kiran", review: "Best in Nashik", stars: 5 }
+]);
+
+4. Answer the following Queries
+a. List the names of hospitals with............ specialization.
+db.hospitals.find({ specialization: "Orthopedic" }, { _id: 0, name: 1 })
+
+b. List the Names of all hospital located in ....... city
+db.hospitals.find({ city: "Nashik" }, { _id: 0, name: 1 })
+
+c. List the names of hospitals where Dr. Deshmukh visits
+db.hospitals.find({ _id: { $in: db.doctors.findOne({ name: "Dr. Deshmukh" }).hospital_ids } }, { _id:0, name:1 })
+
+d. List the names of hospitals whose rating >=4
+db.hospitals.find({ rating: { $gte: 4 } }, { _id: 0, name: 1, rating: 1 })
+
+
+
+(5)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List of Persons</title>
+  <style>
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      border: 2px solid black;
+      border-radius: 10px;
+      margin: 50px auto;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    caption {
+      caption-side: top;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    table, th, td {
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <caption>List of Persons</caption>
+    <tr>
+      <th>Srno</th>
+      <th>Person Name</th>
+      <th>Age</th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+
+</body>
+</html>
+
+
+// MongoDB STart From Here 
+
+1. Model the following database. Many employees working on one project. 20
+A company has various ongoing projects.
+2. Assume appropriate attributes and collections as per the query
+requirements.
+
+3. Insert at least 5 documents in each collection.
+
+use Project DB
+// Employees Collection=id,name,pos
+db.employees.insertMany([
+  { _id: 1, name: "Mr. Patil", position: "Developer" },
+  { _id: 2, name: "Ms. Sharma", position: "Tester" },
+  { _id: 3, name: "Mr. Kumar", position: "Manager" },
+  { _id: 4, name: "Ms. Joshi", position: "Developer" },
+  { _id: 5, name: "Mr. Reddy", position: "Designer" }
+]);
+
+// Projects Collection=id,name,type,dura
+db.projects.insertMany([
+  { _id: 1, name: "Project Alpha", type: "Web", duration_months: 4 },
+  { _id: 2, name: "Project Beta", type: "Mobile", duration_months: 6 },
+  { _id: 3, name: "Project Gamma", type: "Web", duration_months: 2 },
+  { _id: 4, name: "Project Delta", type: "AI", duration_months: 5 },
+  { _id: 5, name: "Project Epsilon", type: "Web", duration_months: 3 }
+]);
+
+// Employee_Projects Collection (many-to-many relation)=eID,PID
+db.employee_projects.insertMany([
+  { employee_id: 1, project_id: 1 },
+  { employee_id: 1, project_id: 3 },
+  { employee_id: 2, project_id: 2 },
+  { employee_id: 3, project_id: 1 },
+  { employee_id: 4, project_id: 1 },
+  { employee_id: 4, project_id: 4 },
+  { employee_id: 5, project_id: 5 },
+  { employee_id: 2, project_id: 4 }
+]);
+
+4. Answer the following Queries
+a. List all names of projects where Project_type =.....
+db.projects.find({ type: "Web" }, { _id: 0, name: 1 })
+
+b. List all the projects with duration greater than 3 months
+db.projects.find({ duration_months: { $gt: 3 } }, { _id: 0, name: 1, duration_months: 1 })
+
+c. Count no. of employees working on ........project
+db.employee_projects.countDocuments({ project_id: db.projects.findOne({ name: "Project Alpha" })._id })
+
+d. List the names of projects on which Mr. Patil is working
+db.projects.find({ _id: { $in: db.employee_projects.find({ employee_id: db.employees.findOne({ name:"Mr. Patil" })._id }).toArray().map(ep => ep.project_id) } }, { _id: 0, name: 1 })
+
+
+
+(6)
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Web Page</title>
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+      }
+      header {
+        background: #0078d7;
+        color: white;
+        padding: 10px;
+      }
+      nav a {
+        margin: 10px;
+        text-decoration: none;
+        color: #0078d7;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: 20px auto;
+        padding: 6px;
+      }
+      th {
+        background: #f0f0f0;
+      }
+      img {
+        width: 150px;
+        height: 100px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png"
+        width="50"
+      />
+      <h2>Welcome to My Web Page</h2>
+    </header>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="https://www.w3schools.com" target="_blank">Learn HTML</a>
+    </nav>
+
+    <p>
+      This page includes a logo, text, pictures, hyperlinks, navigation, and a
+      table.
+    </p>
+
+    <img src="https://www.w3schools.com/html/pic_trulli.jpg" alt="House" />
+    <img src="https://www.w3schools.com/html/img_chania.jpg" alt="City" />
+
+    <table>
+      <tr>
+        <th>Sr.No</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Country</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Gaurav</td>
+        <td>22</td>
+        <td>India</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Mitesh</td>
+        <td>24</td>
+        <td>USA</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Amresh</td>
+        <td>21</td>
+        <td>Germany</td>
+      </tr>
+    </table>
+
+    <footer><p>© 2025 My Web Page</p></footer>
+  </body>
+</html>
+
+
+// MongoDB Start From Here
+
+1. Model the following information as a document database.
+A customer can take different policies and get the benefit. There are
+different types of policies provided by various companies
+2. Assume appropriate attributes and collections as per the query
+requirements.
+3. Insert at least 5 documents in each collection.
+
+use Policies DB 
+// Companies Collection
+db.companies.insertMany([
+  { _id: 1, name: "LIC" },
+  { _id: 2, name: "HDFC Life" },
+  { _id: 3, name: "SBI Life" },
+  { _id: 4, name: "ICICI Prudential" },
+  { _id: 5, name: "TATA AIA" }
+]);
+
+// Policies Collection
+db.policies.insertMany([
+  { _id: 1, name: "Komal Jeevan", type: "Monthly", premium: 1000, company_id: 1 },
+  { _id: 2, name: "Jeevan Anand", type: "Yearly", premium: 12000, company_id: 1 },
+  { _id: 3, name: "Smart Protect", type: "Half Yearly", premium: 6000, company_id: 2 },
+  { _id: 4, name: "Sampoorn", type: "Quarterly", premium: 3000, company_id: 3 },
+  { _id: 5, name: "Wealth Plus", type: "Half Yearly", premium: 7000, company_id: 4 }
+]);
+
+// Customers Collection
+db.customers.insertMany([
+  { name: "Mr. Patil", age: 35, policy_id: 1 },
+  { name: "Ms. Joshi", age: 29, policy_id: 2 },
+  { name: "Mr. Shah", age: 40, policy_id: 3 },
+  { name: "Ms. Deshmukh", age: 32, policy_id: 1 },
+  { name: "Mr. Kumar", age: 45, policy_id: 5 }
+]);
+
+4. Answer the following Queries.
+a. List the details of customers who have taken “Komal Jeevan” Policy
+db.customers.find({ policy_id: db.policies.findOne({ name: "Komal Jeevan" })._id })
+
+b. Display average premium amount
+db.policies.aggregate([{ $group:{ _id:null, avgPremium:{ $avg:"$premium" } } }])
+
+c. Increase the premium amount by 5% for policy type=”Monthly”
+db.policies.updateMany({ type: "Monthly" }, [{ $set: { premium: { $multiply: ["$premium", 1.05] } } }])
+
+d. Count no. of customers who have taken policy type “half yearly”.
+db.policies.countDocuments({type: "Half Yearly"})
+
+
+
+(9)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">College Admission - Student Registration</h3>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="search" class="form-label">Search Student Name</label>
+            <input type="search" class="form-control" id="search" placeholder="Search your name">
+          </div>
+
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullname" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="dob" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Gender</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="other" value="Other" required>
+              <label class="form-check-label" for="other">Other</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="course" class="form-label">Select Course</label>
+            <select class="form-select" id="course" required>
+              <option value="">--Select--</option>
+              <option value="BSc">BSc</option>
+              <option value="BCom">BCom</option>
+              <option value="BA">BA</option>
+              <option value="BTech">BTech</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="terms" required>
+            <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+// MongoDB STart From Here
+
+1. Model the following Customer Loan information as a document database.
+Consider Customer Loan information system where the customer can take
+many types of loans.
+2. Assume appropriate attributes and collections as per the query
+requirements
+3. Insert at least 10 documents in each collection. 
+
+use Loan DB 
+// Customers Collection
+db.customers.insertMany([
+  { _id: 1, name: "Mr. Patil", address: "Nashik", city: "Nashik" },
+  { _id: 2, name: "Mr. Deshmukh", address: "Pimpri", city: "Pimpri" },
+  { _id: 3, name: "Mr. Dinesh", address: "Mumbai", city: "Mumbai" },
+  { _id: 4, name: "Mr. Dev", address: "Pune", city: "Pune" },
+  { _id: 5, name: "Mr. Kale", address: "Pimpri", city: "Pimpri" },
+  { _id: 6, name: "Mr. Darshan", address: "Nashik", city: "Nashik" },
+  { _id: 7, name: "Mr. Ramesh", address: "Pimpri", city: "Pimpri" },
+  { _id: 8, name: "Mr. Pravin", address: "Thane", city: "Thane" },
+  { _id: 9, name: "Mr. Deepak", address: "Pimpri", city: "Pimpri" },
+  { _id: 10, name: "Mr. Dattatray", address: "Mumbai", city: "Mumbai" }
+]);
+
+// Loans Collection
+db.loans.insertMany([
+  { cust_id: 1, loan_type: "Home Loan", loan_amt: 200000 },
+  { cust_id: 2, loan_type: "Car Loan", loan_amt: 80000 },
+  { cust_id: 3, loan_type: "Personal Loan", loan_amt: 50000 },
+  { cust_id: 4, loan_type: "Education Loan", loan_amt: 60000 },
+  { cust_id: 5, loan_type: "Gold Loan", loan_amt: 90000 },
+  { cust_id: 6, loan_type: "Car Loan", loan_amt: 70000 },
+  { cust_id: 7, loan_type: "Home Loan", loan_amt: 150000 },
+  { cust_id: 8, loan_type: "Business Loan", loan_amt: 300000 },
+  { cust_id: 9, loan_type: "Education Loan", loan_amt: 45000 },
+  { cust_id: 10, loan_type: "Personal Loan", loan_amt: 100000 }
+]);
+
+4. Answer the following Queries.
+a. List all customers whose name starts with 'D' character 
+db.customers.find({ name: /^Mr. D/i }, { _id: 0, name: 1 })
+
+b. List the names of customer in descending order who has taken a loan from Pimpri city. 
+db.customers.find({ city: "Pimpri" }, { _id: 0, name: 1 }).sort({ name: -1 })
+
+c. Display customer details having maximum loan amount. 
+db.customers.find({ _id: db.loans.find().sort({ loan_amt: -1 }).limit(1).next().cust_id })
+
+d. Update the address of customer whose name is “Mr. Patil” and loan_amt is greater than 100000. 
+db.customers.updateOne({ name: "Mr. Patil", _id: db.loans.findOne({ loan_amt: { $gt: 100000 } }).cust_id }, { $set: { address: "New Nashik" } })
+
+
+
+(11)
+There are 6 html files in this code in this slip  
+1. frameset.html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Company Departments</title>
+</head>
+<frameset rows="20%,*%" border="2">
+  <frame src="top.html" name="topFrame" scrolling="no">
+  <frameset cols="25%,75%">
+    <frame src="left.html" name="leftFrame">
+    <frame src="about:blank" name="rightFrame">
+  </frameset>
+</frameset>
+</html>
+
+2. hr.html
+<!DOCTYPE html>
+<html>
+<head><title>HR Department</title></head>
+<body style="background-color:#e8f4f8;">
+  <h2>Human Resources Department</h2>
+  <p>The HR department manages recruitment, employee welfare, and training programs.</p>
+</body>
+</html>
+
+3. it.html
+<!DOCTYPE html>
+<html>
+<head><title>IT Department</title></head>
+<body style="background-color:#f9e8f8;">
+  <h2>IT Department</h2>
+  <p>The IT department maintains company software, hardware, and network systems.</p>
+</body>
+</html>
+
+4. left.html
+<!DOCTYPE html>
+<html>
+<head><title>Departments</title></head>
+<body style="background-color:#f0f0f0;">
+  <h3>Departments</h3>
+  <ul>
+    <li><a href="hr.html" target="rightFrame">HR Department</a></li>
+    <li><a href="sales.html" target="rightFrame">Sales Department</a></li>
+    <li><a href="it.html" target="rightFrame">IT Department</a></li>
+  </ul>
+</body>
+</html>
+
+5. sales.html
+<!DOCTYPE html>
+<html>
+<head><title>Sales Department</title></head>
+<body style="background-color:#f4f9e8;">
+  <h2>Sales Department</h2>
+  <p>The Sales department handles client relationships, product promotion, and sales targets.</p>
+</body>
+</html>
+
+6. top.html
+<!DOCTYPE html>
+<html>
+<head><title>Company Name</title></head>
+<body style="background-color:lightblue; text-align:center;">
+  <h1>ABC Technologies Pvt. Ltd.</h1>
+  <h3>Welcome to Our Company Portal</h3>
+</body>
+</html>
+
+
+// MongoDB Start From here 
+
+1. Model the following sales system as a document database. Consider a
+set of products, customers, orders and invoices. An invoice is generated
+when an order is processed.
+2. Assume appropriate attributes and collections as per the query
+requirements.
+3. Insert at least 5 documents in each collection.
+
+use Product DB
+// Products Collection
+db.products.insertMany([
+  { _id: 1, name: "Laptop", price: 50000 },
+  { _id: 2, name: "Smartphone", price: 30000 },
+  { _id: 3, name: "Headphones", price: 5000 },
+  { _id: 4, name: "Refrigerator", price: 25000 },
+  { _id: 5, name: "Smartwatch", price: 10000 }
+]);
+
+// Customers Collection
+db.customers.insertMany([
+  { _id: 1, name: "Mr. Rajiv", city: "Nashik" },
+  { _id: 2, name: "Ms. Sneha", city: "Pune" },
+  { _id: 3, name: "Mr. Amit", city: "Mumbai" },
+  { _id: 4, name: "Ms. Priya", city: "Nashik" },
+  { _id: 5, name: "Mr. Tejas", city: "Thane" }
+]);
+
+// Orders Collection
+db.orders.insertMany([
+  { _id: 1, cust_id: 1, product_id: 1, qty: 1, order_value: 50000 },
+  { _id: 2, cust_id: 2, product_id: 2, qty: 1, order_value: 30000 },
+  { _id: 3, cust_id: 3, product_id: 3, qty: 2, order_value: 10000 },
+  { _id: 4, cust_id: 1, product_id: 5, qty: 1, order_value: 10000 },
+  { _id: 5, cust_id: 4, product_id: 4, qty: 1, order_value: 25000 }
+]);
+
+// Invoices Collection
+db.invoices.insertMany([
+  { _id: 1, order_id: 1, invoice_date: "2023-08-15" },
+  { _id: 2, order_id: 2, invoice_date: "2023-08-16" },
+  { _id: 3, order_id: 5, invoice_date: "2023-08-17" }
+  // Note: Orders 3 & 4 not yet processed
+]);
+
+4. Answer the following Queries.
+a. List all products in the inventory. 
+db.products.find({}, { _id: 0, name: 1, price: 1 })
+
+b. List the details of orders with a value >20000. 
+db.orders.find({ order_value: { $gt: 20000 } })
+
+c. List all the orders which has not been processed (invoice not generated)
+db.orders.find({ _id: { $nin: db.invoices.find().toArray().map(i => i.order_id) } })
+
+d. List all the orders along with their invoice for “Mr. Rajiv”.
+db.orders.find({ cust_id: db.customers.findOne({ name:"Mr. Rajiv" })._id }).forEach(o => {
+  printjson({ order:o, invoice: db.invoices.findOne({ order_id:o._id }) || "Not yet generated" });
+});
+
+
+
+(14)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Plan Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef6f9;
+            margin: 40px;
+        }
+        h1 {
+            text-align: center;
+            background-color: #0077b6;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        form {
+            width: 55%;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .gender, .season {
+            margin-bottom: 15px;
+        }
+        .gender label, .season label {
+            margin-right: 15px;
+        }
+        .buttons {
+            text-align: center;
+        }
+        input[type="submit"], input[type="reset"] {
+            width: 120px;
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        input[type="reset"] {
+            background-color: #d62828;
+        }
+        input[type="submit"]:hover {
+            background-color: #005f8a;
+        }
+        input[type="reset"]:hover {
+            background-color: #a71d2a;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Travel Plan Booking Form</h1>
+
+    <form action="#" method="post">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" placeholder="Enter 10-digit number" pattern="[0-9]{10}" required>
+
+        <label>Gender:</label>
+        <div class="gender">
+            <label><input type="radio" name="gender" value="Male" required> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div>
+
+        <label>Preferred Season:</label>
+        <div class="season">
+            <label><input type="checkbox" name="season" value="Summer"> Summer</label>
+            <label><input type="checkbox" name="season" value="Winter"> Winter</label>
+            <label><input type="checkbox" name="season" value="Monsoon"> Monsoon</label>
+            <label><input type="checkbox" name="season" value="Spring"> Spring</label>
+        </div>
+
+        <label for="location">Preferred Location Type:</label>
+        <select id="location" name="location" required>
+            <option value="">--Select Location Type--</option>
+            <option value="Hill Station">Hill Station</option>
+            <option value="Beach">Beach</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Wildlife">Wildlife</option>
+            <option value="Heritage">Heritage</option>
+        </select>
+
+        <div class="buttons">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+
+</body>
+</html>
+
+
+
+// MongoDB From Start From Here
+
+Model the following system as a graph model, and answer the queries using
+Cypher.
+Government provides various scholarships for students. A students apply for
+scholarship. Student can get benefits of more than one scholarship if satisfies
+the criteria. Student can recommend it for his friends or other family members
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. 
+2. Create nodes and relationships, along with their properties, andvisualize
+your actual Graph model. 
+CREATE
+(s1:Student {name:'Amit', category:'OBC', year:2021}),
+(s2:Student {name:'Ravi', category:'SC', year:2021}),
+(s3:Student {name:'Sita', category:'OBC', year:2020}),
+
+(sch1:Scholarship {name:'OBC Merit', category:'OBC', income_limit:80000, year:'2020-2021'}),
+(sch2:Scholarship {name:'Minority Aid', category:'Minority', income_limit:100000, year:'2020-2021'}),
+
+(s1)-[:APPLIED_FOR]->(sch1),
+(s3)-[:APPLIED_FOR]->(sch1),
+(s2)-[:APPLIED_FOR]->(sch2),
+(s1)-[:RECOMMENDED]->(s3);
+
+3. Answer the following Queries in Cypher:
+a. List the names of scholarship for OBC category.
+MATCH (s:Scholarship {category:'OBC'})
+RETURN s.name;
+
+b. Count no. of students who are benefitted by ____ scholarship in year 2020-2021 
+MATCH (st:Student)-[:APPLIED_FOR]->(sc:Scholarship {name:'OBC Merit', year:'2020-2021'})
+RETURN COUNT(st) AS total_students;
+
+
+c. Update the income limit for _____scholarship. 
+MATCH (s:Scholarship {name:'OBC Merit'})
+SET s.income_limit = 90000
+RETURN s;
+
+
+d. List the most popular scholarship.
+MATCH (:Student)-[:APPLIED_FOR]->(s:Scholarship)
+RETURN s.name, COUNT(*) AS total
+ORDER BY total DESC
+LIMIT 1;
+
+
+
+(15)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background: #f5f5f5;">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg p-4">
+          <h3 class="text-center mb-4">Registration Form</h3>
+          <form>
+            <div class="mb-3">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-control" placeholder="First Name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-control" placeholder="Last Name" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Department / Office</label>
+              <select class="form-select" required>
+                <option selected disabled>Select your Department/Office</option>
+                <option>Sales</option>
+                <option>Marketing</option>
+                <option>Finance</option>
+                <option>HR</option>
+                <option>IT</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control" placeholder="Username" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" placeholder="Password" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" placeholder="Confirm Password" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="Email Address" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Contact No.</label>
+              <input type="tel" class="form-control" placeholder="(+91)" required>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-warning text-white fw-bold">SUBMIT</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+// MongoDB Start From Here
+
+Model the following movie system as a Graph database.
+Consider a information about of movie and actors. One movie can have
+more than one actor
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. 
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model.
+CREATE
+(a1:Actor {name:'Shahrukh Khan', age:58}),
+(a2:Actor {name:'Deepika Padukone', age:38}),
+(a3:Actor {name:'Salman Khan', age:59}),
+
+(m1:Movie {title:'Pathaan', year:2023, business:1050, awards:5}),
+(m2:Movie {title:'Jawan', year:2023, business:1200, awards:7}),
+(m3:Movie {title:'Kick', year:2014, business:400, awards:2}),
+
+(a1)-[:ACTED_IN]->(m1),
+(a1)-[:ACTED_IN]->(m2),
+(a2)-[:ACTED_IN]->(m1),
+(a2)-[:ACTED_IN]->(m2),
+(a3)-[:ACTED_IN]->(m3);
+
+3. Answer the Queries:
+a. Find movie which made highest business.
+MATCH (m:Movie)
+RETURN m.title, m.business
+ORDER BY m.business DESC
+LIMIT 1;
+
+b. Display details of movie along with actors.
+MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
+RETURN m.title AS Movie, collect(a.name) AS Actors;
+
+c. List all the movie of “Shahrukh Khan”. 
+MATCH (a:Actor {name:'Shahrukh Khan'})-[:ACTED_IN]->(m:Movie)
+RETURN m.title;
+
+d. Display all movie having more than 2 awards received
+MATCH (m:Movie)
+WHERE m.awards > 2
+RETURN m.title, m.awards;
+
+
+
+(16)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .contact-box {
+      display: flex;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .contact-left {
+      background: #f39c12;
+      color: #fff;
+      padding: 40px 30px;
+      width: 35%;
+    }
+    .contact-left h3 {
+      font-weight: bold;
+    }
+    .contact-right {
+      padding: 40px;
+      width: 65%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="contact-box">
+          <div class="contact-left">
+            <h3>📧 Contact Us</h3>
+            <p>We would love to hear from you!</p>
+          </div>
+
+          <div class="contact-right">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" placeholder="Enter First Name" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" placeholder="Enter Last Name" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Enter Email" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Comment</label>
+                <textarea class="form-control" rows="3" placeholder="Your message..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-dark px-4">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>
+
+
+// MongoDB Start From Here
+
+Model the following food service industry information as a graph
+model, and answer the following queries using Cypher.
+Consider food service industries like ZOMATO, Swiggy around us.
+Popular restaurants are connected to these industries to increase sell. A
+person order food through this industry and get offers. A person give
+rate(1-5 stars) to company its facility/facilities. and can recommend this
+to his/her friends.
+4. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. 
+5. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. 
+CREATE
+(p1:Person {name:'Sahil', age:25}),
+(p2:Person {name:'Sara', age:30}),
+(p3:Person {name:'Rahul', age:28}),
+
+(fs1:FoodService {name:'Swiggy'}),
+(fs2:FoodService {name:'Zomato'}),
+
+(r1:Restaurant {name:'Tandoori Tales', area:'Indiranagar', rating:5}),
+(r2:Restaurant {name:'Pizza Hub', area:'Koramangala', rating:4}),
+(r3:Restaurant {name:'Burger King', area:'Indiranagar', rating:3}),
+
+(o1:Order {order_id:1, date:'2023-01-01'}),
+(o2:Order {order_id:2, date:'2023-01-01'}),
+(o3:Order {order_id:3, date:'2023-02-01'}),
+
+(p1)-[:PLACED]->(o1),
+(p2)-[:PLACED]->(o2),
+(p3)-[:PLACED]->(o3),
+
+(o1)-[:FROM]->(r1),
+(o2)-[:FROM]->(r2),
+(o3)-[:FROM]->(r3),
+
+(o1)-[:USING]->(fs1),
+(o2)-[:USING]->(fs1),
+(o3)-[:USING]->(fs2),
+
+(p1)-[:RECOMMENDED]->(r1),
+(p2)-[:RECOMMENDED]->(r2);
+
+
+6. Answer the Queries.
+a. Count no. of customers who place order on “1/1/2023” 
+MATCH (p:Person)-[:PLACED]->(o:Order {date:'2023-01-01'})
+RETURN count(p) AS TotalCustomers;
+
+b. List the names of customers whose name starts with S and place order using Swiggy 
+MATCH (p:Person)-[:PLACED]->(o:Order)-[:USING]->(fs:FoodService {name:'Swiggy'})
+WHERE p.name STARTS WITH 'S'
+RETURN p.name;
+
+c. List the names of hotels with high rating (>=4).
+MATCH (r:Restaurant)
+WHERE r.rating >= 4
+RETURN r.name, r.rating;
+
+d. List the most recommended hotels in....... area.
+MATCH (p:Person)-[:RECOMMENDED]->(r:Restaurant {area:'Indiranagar'})
+RETURN r.name, count(p) AS Recommendations
+ORDER BY Recommendations DESC
+LIMIT 1;
+
+
+
+(17)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Model Example</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .outer-box {
+      background-color: #ff9933;
+      width: 300px;
+      height: 300px;
+      border: 5px solid black;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inner-box {
+      background-color: #ffff66;
+      width: 200px;
+      height: 120px;
+      border: 2px solid black;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inner-box h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .inner-box p {
+      margin: 5px 0 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="outer-box">
+    <div class="inner-box">
+      <h3>M.Sc (Computer Sci)</h3>
+      <p>Academic Year<br>2023-24</p>
+    </div>
+  </div>
+</body>
+</html>
+
+
+// MongoDB Start From Here
+
+Model the following Books and Publisher information as a graph model, 
+and answer the following queries using Cypher.
+Author wrote various types of books which is published by publishers.
+A reader reads a books according to his linking and can
+recommend/provide review for it.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. 
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model.
+CREATE
+(a1:Author {name:'R.K. Laxman'}),
+(a2:Author {name:'Amish Tripathi'}),
+(a3:Author {name:'Stan Lee'}),
+
+(b1:Book {title:'Comics World', type:'Comics'}),
+(b2:Book {title:'Shiva Trilogy', type:'Mythology'}),
+(b3:Book {title:'Science Daily', type:'Science'}),
+
+(p1:Publisher {name:'Sage'}),
+(p2:Publisher {name:'Nirali'}),
+(p3:Publisher {name:'Penguin'}),
+
+(r1:Reader {name:'Rahul'}),
+(r2:Reader {name:'Sita'}),
+(r3:Reader {name:'Mitesh'}),
+
+(a1)-[:WROTE]->(b1),
+(a2)-[:WROTE]->(b2),
+(a3)-[:WROTE]->(b1),
+(b1)-[:PUBLISHED_BY]->(p1),
+(b2)-[:PUBLISHED_BY]->(p1),
+(b3)-[:PUBLISHED_BY]->(p2),
+(r1)-[:READ]->(b1),
+(r2)-[:READ]->(b2),
+(r3)-[:READ]->(b1),
+(r1)-[:REVIEWED {rating:5}]->(b1),
+(r2)-[:REVIEWED {rating:4}]->(b2),
+(r3)-[:REVIEWED {rating:2}]->(b1);
+
+
+3. Answer the Queries
+a. List the names of authors who wrote “Comics”.
+MATCH (a:Author)-[:WROTE]->(b:Book {type:'Comics'})
+RETURN a.name;
+
+b. Count no. of readers of _____book published by “Sage”.
+MATCH (:Reader)-[:READ]->(:Book {title:'Comics World'})-[:PUBLISHED_BY]->(:Publisher {name:'Sage'})
+RETURN count(*) AS TotalReaders;
+
+c. List all the publisher whose name starts with “N” 
+MATCH (p:Publisher)
+WHERE p.name STARTS WITH 'N'
+RETURN p.name;
+
+d. List the names of people who have given a rating of (>=3) for ______ book
+MATCH (r:Reader)-[rev:REVIEWED]->(b:Book {title:'Comics World'})
+WHERE rev.rating >= 3
+RETURN r.name, rev.rating;
+
+
+
+(19)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Progress</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f0f0f0;
+        }
+
+        #downloadBtn {
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #downloadBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #progressContainer {
+            width: 50%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 30px auto;
+            height: 35px;
+            overflow: hidden;
+            display: none; 
+        }
+
+        #progressBar {
+            height: 100%;
+            width: 0%;
+            background-color: #28a745;
+            text-align: center;
+            line-height: 35px;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>File Download Simulation</h1>
+    <button id="downloadBtn">Start Download</button>
+
+    <div id="progressContainer">
+        <div id="progressBar">0%</div>
+    </div>
+
+    <script>
+        const downloadBtn = document.getElementById("downloadBtn");
+        const progressContainer = document.getElementById("progressContainer");
+        const progressBar = document.getElementById("progressBar");
+
+        downloadBtn.addEventListener("click", () => {
+            downloadBtn.disabled = true; 
+            progressContainer.style.display = "block"; 
+
+            let progress = 0; 
+
+            const interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    alert("Download completed"); 
+                    downloadBtn.disabled = false; 
+                } else {
+                    progress += 5; 
+                    progressBar.style.width = progress + "%"; 
+                    progressBar.textContent = progress + "%"; 
+                }
+            }, 1000); 
+        });
+    </script>
+</body>
+</html>
+
+
+// MongoDB Start From Here 
+
+Model the following Laptop manufacturing information system as a 
+graph model, and answer the following queries using Cypher.
+Consider an Laptop manufacturing industries which produces different
+types of laptops. A customer can buya laptop, recommend or rate a the
+product.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. 
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model.
+CREATE
+(l1:Laptop {company:'DELL', model:'XPS 15', type:'Ultrabook', specs:'16GB RAM, 512GB SSD'}),
+(l2:Laptop {company:'HP', model:'Pavilion', type:'Gaming', specs:'32GB RAM, 1TB SSD'}),
+(l3:Laptop {company:'Apple', model:'MacBook Air', type:'Ultrabook', specs:'8GB RAM, 256GB SSD'}),
+
+(c1:Customer {name:'Rahul'}),
+(c2:Customer {name:'Sita'}),
+(c3:Customer {name:'Amresh'}),
+
+(c1)-[:BOUGHT {date:'2023-01-26'}]->(l1),
+(c2)-[:BOUGHT {date:'2023-02-01'}]->(l2),
+(c3)-[:BOUGHT {date:'2023-01-26'}]->(l3),
+
+(c1)-[:RECOMMENDED]->(l1),
+(c2)-[:RECOMMENDED]->(l2),
+(c3)-[:RECOMMENDED]->(l1),
+
+(c1)-[:RATED {rating:5}]->(l1),
+(c2)-[:RATED {rating:4}]->(l2),
+(c3)-[:RATED {rating:5}]->(l1);
+
+3. Answer the Queries
+a. List the characteristics of........ laptop. 
+MATCH (l:Laptop {model:'XPS 15'})
+RETURN l.company, l.model, l.type, l.specs;
+
+b. List the name of customers who bought a “DELL” company laptop 
+MATCH (c:Customer)-[:BOUGHT]->(l:Laptop {company:'DELL'})
+RETURN c.name;
+
+c. List the customers who purchase a device on “26/01/2023” 
+MATCH (c:Customer)-[b:BOUGHT]->(l:Laptop)
+WHERE b.date = '2023-01-26'
+RETURN c.name, l.model;
+
+d. List the most recommended device.
+MATCH (c:Customer)-[:RECOMMENDED]->(l:Laptop)
+RETURN l.model, count(c) AS Recommendations
+ORDER BY Recommendations DESC
+LIMIT 1;
+
+
+
+
+(22)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Text Effects</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #222;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .text-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+
+        .text-3d {
+            font-size: 50px;
+            font-weight: bold;
+            color: #f39c12;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            text-align: center;
+
+            text-shadow: 
+                1px 1px 0 #d35400,
+                2px 2px 0 #c0392b,
+                3px 3px 0 #8e44ad,
+                4px 4px 0 #2980b9,
+                5px 5px 0 #16a085;
+        }
+
+        .text-wrap {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #ecf0f1;
+            word-wrap: break-word; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            width: 100%;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #444;
+        }
+
+        .text-effects {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #1abc9c;
+            font-style: italic;
+            font-variant: small-caps;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-container">
+        <div class="text-3d">3D Text Example</div>
+        <div class="text-wrap">
+            This is a long text that will automatically wrap to the next line if it exceeds the container width. Text overflow is also applied.
+        </div>
+        <div class="text-effects">Stylish CSS Text Effects</div>
+    </div>
+
+</body>
+</html>
+
+
+Model the following Car Showroom information as a graph model,and answer 
+the queries using Cypher. Consider a car showroom with different models of
+cars like sofas Honda city, Skoda, Creta, Swift, Ertiga etc. Showroom is
+divided into different sections, onesection for each car model; each section is
+handled by a sales staff. Asales staff can handle one or more sections.
+Customer may enquire about car. An enquiry may result in a purchase by the
+customer.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model.
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. 
+CREATE (s1:SalesStaff {name:'Mr. Narayan', employee_id:101}),
+       (s2:SalesStaff {name:'Ms. Priya', employee_id:102});
+
+CREATE (sec1:Section {name:'Section A'}),
+       (sec2:Section {name:'Section B'}),
+       (sec3:Section {name:'Section C'}),
+       (sec4:Section {name:'Section D'});
+
+CREATE (c1:CarModel {name:'Honda City', price:1200000}),
+       (c2:CarModel {name:'Skoda', price:1500000}),
+       (c3:CarModel {name:'Creta', price:1300000}),
+       (c4:CarModel {name:'Swift', price:700000}),
+       (c5:CarModel {name:'Ertiga', price:900000});
+
+CREATE 
+(s1)-[:HANDLES]->(sec1),
+(s1)-[:HANDLES]->(sec2),
+(s2)-[:HANDLES]->(sec3),
+(s2)-[:HANDLES]->(sec4),
+
+(sec1)-[:HAS]->(c1),
+(sec2)-[:HAS]->(c2),
+(sec3)-[:HAS]->(c3),
+(sec4)-[:HAS]->(c4),
+(sec4)-[:HAS]->(c5);
+
+CREATE (cust1:Customer {name:'Ramesh', contact:'1234567890'}),
+       (cust2:Customer {name:'Sita', contact:'9876543210'}),
+       (cust3:Customer {name:'Rahul', contact:'5555555555'});
+
+CREATE
+(cust1)-[:ENQUIRED]->(c1),
+(cust1)-[:PURCHASED]->(c1),
+(cust2)-[:ENQUIRED]->(c2),
+(cust3)-[:ENQUIRED]->(c3);
+
+3. Answer the following queries:
+a. List the types of cars available in the showroom.
+MATCH (c:CarModel)
+RETURN c.name AS CarModel;
+
+b. List the sections handled by Mr. Narayan.
+
+c. List the names of customers who have done only enquiry but not
+made any purchase. 
+d. List the highly sale car model.
+
+
+
+
+(24)
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calendar Input Types Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      font-size: 28px;
+      color: #333;
+      text-decoration: underline;
+    }
+    form {
+      display: inline-block;
+      background: white;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #aaa;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Input Types Examples</h2>
+  <form>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
+
+    <label for="datetime">Datetime:</label>
+    <input type="datetime" id="datetime" name="datetime">
+
+    <label for="datetime-local">Datetime-local:</label>
+    <input type="datetime-local" id="datetime-local" name="datetime-local">
+
+    <label for="month">Month:</label>
+    <input type="month" id="month" name="month">
+
+    <label for="time">Time:</label>
+    <input type="time" id="time" name="time">
+
+    <label for="week">Week:</label>
+    <input type="week" id="week" name="week">
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>
+
+
+// MongoDB Start From here
+
+
+Model the following Library information system as a graph model,and answer 
+the following queries using Cypher.
+Consider a library information system having different types of books like text,
+reference, bibliography etc. A student can buy one or more types of book. A
+student can recommend or rate a book according to its type.
+1. Identify the labels and relationships, along with their properties, and
+draw a high-level Graph model. 
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. 
+CREATE
+(b1:Book {title:'Mathematics 101', type:'Text', author:'R. Kumar'}),
+(b2:Book {title:'Physics Handbook', type:'Reference', author:'S. Sharma'}),
+(b3:Book {title:'History Guide', type:'Bibliography', author:'A. Singh'}),
+(b4:Book {title:'Chemistry Basics', type:'Text', author:'M. Verma'}),
+(b5:Book {title:'Biology Reference', type:'Reference', author:'P. Desai'}),
+
+(s1:Student {name:'Amresh'}),
+(s2:Student {name:'Mitesh'}),
+(s3:Student {name:'Shubham'}),
+
+(s1)-[:BOUGHT]->(b1),
+(s1)-[:BOUGHT]->(b2),
+(s2)-[:BOUGHT]->(b3),
+(s2)-[:BOUGHT]->(b4),
+(s3)-[:BOUGHT]->(b1),
+(s3)-[:BOUGHT]->(b5),
+
+(s1)-[:RECOMMENDED]->(b1),
+(s2)-[:RECOMMENDED]->(b4),
+(s3)-[:RECOMMENDED]->(b5),
+
+(s1)-[:RATED {rating:5}]->(b1),
+(s2)-[:RATED {rating:4}]->(b4),
+(s3)-[:RATED {rating:5}]->(b5);
+
+3. Answer the following Queries :
+a. List the books of type “text” 
+MATCH (b:Book {type:'Text'})
+RETURN b.title, b.author;
+
+b. List the name of student who bought a text and reference types books.
+MATCH (s:Student)-[:BOUGHT]->(b:Book)
+WITH s, collect(DISTINCT b.type) AS types
+WHERE 'Text' IN types AND 'Reference' IN types
+RETURN s.name, types;
+
+c. List the most recommended book type. 
+MATCH (s:Student)-[:RECOMMENDED]->(b:Book)
+RETURN b.type, count(s) AS Recommendations
+ORDER BY Recommendations DESC
+LIMIT 1;
+
+d. List the student who buy the more than one type of book
+MATCH (s:Student)-[:BOUGHT]->(b:Book)
+WITH s, count(DISTINCT b.type) AS TypeCount
+WHERE TypeCount > 1
+RETURN s.name, TypeCount;
+
+
+
+
+(25)
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Entry Form</title>
+  <style>
+    body {
+      background-color: #b3d9f7;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h2 {
+      color: darkred;
+      text-decoration: underline;
+      margin-top: 30px;
+    }
+
+    form {
+      background-color: #d7ebf9;
+      border: 2px solid #333;
+      border-radius: 10px;
+      width: 300px;
+      margin: 20px auto;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 0 8px #888;
+    }
+
+    label {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin: 8px 0 4px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 8px;
+      border: 1px solid #888;
+      border-radius: 4px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 8px;
+      border-radius: 4px;
+      border: 1px solid #888;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>ENTRY FORM</h2>
+
+  <form>
+    <label>Enter Your Name:</label>
+    <input type="text" placeholder="Enter full name" required>
+
+    <label>Enter Your Age:</label>
+    <input type="number" min="1" max="100" required>
+
+    <label>Enter Your Email:</label>
+    <input type="email" placeholder="example@gmail.com" required>
+
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="male"> Male
+    <input type="radio" name="gender" value="female"> Female
+
+    <label>Nationality:</label>
+    <select>
+      <option>Indian</option>
+      <option>American</option>
+      <option>Canadian</option>
+      <option>Other</option>
+    </select>
+
+    <label>Languages Known:</label>
+    <input type="checkbox" value="English"> English
+    <input type="checkbox" value="Hindi"> Hindi
+    <input type="checkbox" value="Marathi"> Marathi
+
+    <label>Enter Your Password:</label>
+    <input type="password" required>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>
+
+
+// MongoDB Start From Here
+
+Model the following University information system as a graph model, and 
+answer the following queries using Cypher.
+University has various departments like Physics, Geography, Computer etc.
+Each department conducts various courses and a course may be conducted by
+multiple departments. Every course may have recommendations provided by
+people.
+1. Identify the labels and relationships, along with their properties, anddraw
+a high-level Graph model. 
+2. Create nodes and relationships, along with their properties, and
+visualize your actual Graph model. 
+CREATE
+(d1:Department {name:'Physics'}),
+(d2:Department {name:'Geography'}),
+(d3:Department {name:'Computer'}),
+(d4:Department {name:'Mathematics'}),
+
+(c1:Course {name:'Quantum Mechanics', code:'PHY101'}),
+(c2:Course {name:'Astrophysics', code:'PHY102'}),
+(c3:Course {name:'Geography Basics', code:'GEO101'}),
+(c4:Course {name:'Data Structures', code:'CS101'}),
+(c5:Course {name:'Algorithms', code:'CS102'}),
+(c6:Course {name:'Calculus', code:'MATH101'}),
+(c7:Course {name:'Linear Algebra', code:'MATH102'}),
+(c8:Course {name:'Computer Graphics', code:'CS103'}),
+
+(p1:Person {name:'Rahul'}),
+(p2:Person {name:'Sita'}),
+(p3:Person {name:'Amresh'}),
+
+(d1)-[:OFFERS]->(c1),
+(d1)-[:OFFERS]->(c2),
+(d2)-[:OFFERS]->(c3),
+(d3)-[:OFFERS]->(c4),
+(d3)-[:OFFERS]->(c5),
+(d3)-[:OFFERS]->(c8),
+(d4)-[:OFFERS]->(c6),
+(d4)-[:OFFERS]->(c7),
+(d3)-[:OFFERS]->(c7),  // Linear Algebra offered by both CS and Math
+
+(c1)-[:RECOMMENDED_BY]->(p1),
+(c3)-[:RECOMMENDED_BY]->(p2),
+(c4)-[:RECOMMENDED_BY]->(p3),
+(c7)-[:RECOMMENDED_BY]->(p1),
+(c7)-[:RECOMMENDED_BY]->(p2);
+
+3. Answer the following Queries :
+a. List the details of all the departments in the university. 
+MATCH (d:Department)
+RETURN d.name;
+
+b. List the names of the courses provided by Physics department. 
+MATCH (d:Department {name:'Physics'})-[:OFFERS]->(c:Course)
+RETURN c.name, c.code;
+
+c. List the most recommended course in Geography department. 
+MATCH (d:Department {name:'Geography'})-[:OFFERS]->(c:Course)
+OPTIONAL MATCH (c)-[:RECOMMENDED_BY]->(p:Person)
+RETURN c.name, count(p) AS Recommendations
+ORDER BY Recommendations DESC
+LIMIT 1;
+
+d. List the names of common courses across Mathematics and computer department.
+MATCH (d1:Department {name:'Mathematics'})-[:OFFERS]->(c:Course)<-[:OFFERS]-(d2:Department {name:'Computer'})
+RETURN c.name, c.code;
