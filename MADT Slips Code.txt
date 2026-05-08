@@ -1,0 +1,3282 @@
+Slip 2
+
+package com.example.a2;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText num1, num2, perfectNum;
+    TextView result;
+
+    Button add, sub, mul, div, checkPerfect;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Calculator Views
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+
+        add = findViewById(R.id.add);
+        sub = findViewById(R.id.sub);
+        mul = findViewById(R.id.mul);
+        div = findViewById(R.id.div);
+
+        // Perfect Number Views
+        perfectNum = findViewById(R.id.perfectNum);
+        checkPerfect = findViewById(R.id.checkPerfect);
+
+        // Result
+        result = findViewById(R.id.result);
+
+        // Arithmetic Operations
+        add.setOnClickListener(v -> calculate("+"));
+
+        sub.setOnClickListener(v -> calculate("-"));
+
+        mul.setOnClickListener(v -> calculate("*"));
+
+        div.setOnClickListener(v -> calculate("/"));
+
+        // Perfect Number Check
+        checkPerfect.setOnClickListener(v -> checkPerfectNumber());
+    }
+
+    // Calculator Method
+    private void calculate(String op) {
+
+        String n1 = num1.getText().toString();
+        String n2 = num2.getText().toString();
+
+        if (n1.isEmpty() || n2.isEmpty()) {
+            result.setText("Enter both numbers");
+            return;
+        }
+
+        double a = Double.parseDouble(n1);
+        double b = Double.parseDouble(n2);
+
+        double res = 0;
+
+        switch (op) {
+
+            case "+":
+                res = a + b;
+                break;
+
+            case "-":
+                res = a - b;
+                break;
+
+            case "*":
+                res = a * b;
+                break;
+
+            case "/":
+
+                if (b == 0) {
+                    result.setText("Cannot divide by zero");
+                    return;
+                }
+
+                res = a / b;
+                break;
+        }
+
+        result.setText("Calculator Result = " + res);
+    }
+
+    // Perfect Number Method
+    private void checkPerfectNumber() {
+
+        String input = perfectNum.getText().toString();
+
+        if (input.isEmpty()) {
+
+            Toast.makeText(this,
+                    "Enter number",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        int num = Integer.parseInt(input);
+
+        int sum = 0;
+
+        for (int i = 1; i <= num / 2; i++) {
+
+            if (num % i == 0) {
+                sum += i;
+            }
+        }
+
+        if (sum == num && num != 0) {
+
+            Toast.makeText(this,
+                    num + " is Perfect Number",
+                    Toast.LENGTH_LONG).show();
+
+        } else {
+            Toast.makeText(this,
+                    num + " is NOT Perfect Number",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Calculator Section -->
+
+        <EditText
+            android:id="@+id/num1"
+            android:hint="Enter First Number"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num2"
+            android:hint="Enter Second Number"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/add"
+            android:text="Addition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/sub"
+            android:text="Subtraction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/mul"
+            android:text="Multiplication"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/div"
+            android:text="Division"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Perfect Number Section -->
+
+        <EditText
+            android:id="@+id/perfectNum"
+            android:hint="Enter Number for Perfect Check"
+            android:inputType="number"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/checkPerfect"
+            android:text="Check Perfect Number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Result -->
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>
+
+
+
+Slip 3
+package com.example.a3;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText armstrongNum, phone;
+    Button checkArmstrong, checkPhone;
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        armstrongNum = findViewById(R.id.armstrongNum);
+        phone = findViewById(R.id.phone);
+
+        checkArmstrong = findViewById(R.id.checkArmstrong);
+        checkPhone = findViewById(R.id.checkPhone);
+
+        result = findViewById(R.id.result);
+
+        // Armstrong Check
+        checkArmstrong.setOnClickListener(v -> checkArmstrong());
+
+        // Phone Validation
+        checkPhone.setOnClickListener(v -> validatePhone());
+    }
+
+    // Armstrong Number Program
+    private void checkArmstrong() {
+
+        String input = armstrongNum.getText().toString();
+
+        if (input.isEmpty()) {
+            result.setText("Enter a number");
+            return;
+        }
+
+        int num = Integer.parseInt(input);
+        int original = num;
+        double sum = 0;
+        int digits = input.length();
+
+        while (num > 0) {
+
+            int digit = num % 10;
+
+            sum = sum + Math.pow(digit, digits);
+
+            num = num / 10;
+        }
+
+        if (sum == original) {
+
+            result.setText(original + " is Armstrong Number");
+
+        } else {
+
+            result.setText(original + " is NOT Armstrong Number");
+        }
+    }
+
+    // Phone Validation Program
+    private void validatePhone() {
+
+        String number = phone.getText().toString().trim();
+
+        // Valid Area Codes:
+        // 040,041,050,0400,044
+        // Total digits 6-8
+
+        String pattern = "^(0400|040|041|050|044)\\d{2,4}$";
+
+        if (number.matches(pattern)) {
+
+            result.setText("Valid Phone Number");
+
+        } else {
+
+            result.setText("Invalid Phone Number");
+        }
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Armstrong Number Section -->
+
+        <TextView
+            android:text="Armstrong Number Check"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/armstrongNum"
+            android:hint="Enter Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/checkArmstrong"
+            android:text="Check Armstrong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Phone Validation Section -->
+
+        <TextView
+            android:text="Phone Number Validation"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/phone"
+            android:hint="Enter Phone Number"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/checkPhone"
+            android:text="Validate Phone Number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Result -->
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>
+
+
+Slip 4
+package com.example.a4;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    ImageSwitcher imageSwitcher;
+    Button nextBtn, prevBtn, searchBtn;
+    EditText location;
+
+    int[] images = {
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3
+    };
+
+    int index = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        imageSwitcher = findViewById(R.id.imageSwitcher);
+
+        nextBtn = findViewById(R.id.nextBtn);
+        prevBtn = findViewById(R.id.prevBtn);
+
+        searchBtn = findViewById(R.id.searchBtn);
+
+        location = findViewById(R.id.location);
+
+        // setFactory()
+        imageSwitcher.setFactory(() -> {
+
+            ImageView imageView = new ImageView(getApplicationContext());
+
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+            imageView.setLayoutParams(
+                    new ImageSwitcher.LayoutParams(
+                            ImageSwitcher.LayoutParams.MATCH_PARENT,
+                            ImageSwitcher.LayoutParams.MATCH_PARENT
+                    )
+            );
+
+            return imageView;
+        });
+
+        // First Image
+        imageSwitcher.setImageResource(images[index]);
+
+        // Next Button
+        nextBtn.setOnClickListener(v -> {
+
+            index = (index + 1) % images.length;
+
+            imageSwitcher.setImageResource(images[index]);
+        });
+
+        // Previous Button
+        prevBtn.setOnClickListener(v -> {
+
+            index = (index - 1 + images.length) % images.length;
+
+            imageSwitcher.setImageResource(images[index]);
+        });
+
+        // Google Map Search
+        searchBtn.setOnClickListener(v -> searchLocation());
+    }
+
+    private void searchLocation() {
+
+        String loc = location.getText().toString();
+
+        if (loc.isEmpty()) {
+
+            Toast.makeText(this,
+                    "Enter Location",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        Uri uri = Uri.parse("geo:0,0?q=" + Uri.encode(loc));
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+        intent.setPackage("com.google.android.apps.maps");
+
+        startActivity(intent);
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Image Switcher -->
+
+        <TextView
+            android:text="Image Switcher"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageSwitcher
+            android:id="@+id/imageSwitcher"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/prevBtn"
+                android:text="Previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/nextBtn"
+                android:text="Next"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Google Map Search -->
+
+        <TextView
+            android:text="Google Map Search"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/location"
+            android:hint="Enter Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:text="Search Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>
+
+
+
+Slip 5
+package com.example.a5;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button dialogBtn, displayBtn, clearBtn, exitBtn;
+
+    EditText name, message;
+
+    CheckBox bold, italic, underline;
+
+    RadioGroup colorGroup;
+
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        dialogBtn = findViewById(R.id.dialogBtn);
+
+        name = findViewById(R.id.name);
+        message = findViewById(R.id.message);
+
+        bold = findViewById(R.id.bold);
+        italic = findViewById(R.id.italic);
+        underline = findViewById(R.id.underline);
+
+        colorGroup = findViewById(R.id.colorGroup);
+
+        displayBtn = findViewById(R.id.displayBtn);
+        clearBtn = findViewById(R.id.clearBtn);
+        exitBtn = findViewById(R.id.exitBtn);
+
+        result = findViewById(R.id.result);
+
+        // Alert Dialog
+        dialogBtn.setOnClickListener(v -> showDialogBox());
+
+        // Display Message
+        displayBtn.setOnClickListener(v -> displayMessage());
+
+        // Clear
+        clearBtn.setOnClickListener(v -> clearData());
+
+        // Exit
+        exitBtn.setOnClickListener(v -> finish());
+    }
+
+    // Alert Dialog Method
+    private void showDialogBox() {
+
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(this);
+
+        builder.setTitle("Alert Dialog");
+
+        builder.setMessage("Do you want to continue?");
+
+        builder.setPositiveButton("Yes",
+                (dialog, which) ->
+                        Toast.makeText(this,
+                                "Yes Clicked",
+                                Toast.LENGTH_SHORT).show());
+
+        builder.setNegativeButton("No",
+                (dialog, which) ->
+                        Toast.makeText(this,
+                                "No Clicked",
+                                Toast.LENGTH_SHORT).show());
+
+        builder.show();
+    }
+
+    // Display Message Method
+    private void displayMessage() {
+
+        String n = name.getText().toString();
+
+        String msg = message.getText().toString();
+
+        String finalText = n + " : " + msg;
+
+        result.setText(finalText);
+
+        // Bold & Italic
+        int style = Typeface.NORMAL;
+
+        if (bold.isChecked() && italic.isChecked()) {
+
+            style = Typeface.BOLD_ITALIC;
+
+        } else if (bold.isChecked()) {
+
+            style = Typeface.BOLD;
+
+        } else if (italic.isChecked()) {
+
+            style = Typeface.ITALIC;
+        }
+
+        result.setTypeface(null, style);
+
+        // Underline
+        if (underline.isChecked()) {
+
+            result.setPaintFlags(
+                    result.getPaintFlags()
+                            | Paint.UNDERLINE_TEXT_FLAG);
+
+        } else {
+
+            result.setPaintFlags(
+                    result.getPaintFlags()
+                            & (~Paint.UNDERLINE_TEXT_FLAG));
+        }
+
+        // Text Color
+        int selected = colorGroup.getCheckedRadioButtonId();
+
+        if (selected == R.id.red) {
+
+            result.setTextColor(Color.RED);
+
+        } else if (selected == R.id.green) {
+
+            result.setTextColor(Color.GREEN);
+
+        } else if (selected == R.id.blue) {
+
+            result.setTextColor(Color.BLUE);
+        }
+    }
+
+    // Clear Method
+    private void clearData() {
+
+        name.setText("");
+        message.setText("");
+
+        result.setText("");
+
+        bold.setChecked(false);
+        italic.setChecked(false);
+        underline.setChecked(false);
+
+        colorGroup.clearCheck();
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Alert Dialog Section -->
+
+        <Button
+            android:id="@+id/dialogBtn"
+            android:text="Show Alert Dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Name & Message Section -->
+
+        <EditText
+            android:id="@+id/name"
+            android:hint="Enter Name"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/message"
+            android:hint="Enter Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- CheckBoxes -->
+
+        <CheckBox
+            android:id="@+id/bold"
+            android:text="Bold"/>
+
+        <CheckBox
+            android:id="@+id/italic"
+            android:text="Italic"/>
+
+        <CheckBox
+            android:id="@+id/underline"
+            android:text="Underline"/>
+
+        <!-- Radio Buttons -->
+
+        <RadioGroup
+            android:id="@+id/colorGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/red"
+                android:text="Red"/>
+
+            <RadioButton
+                android:id="@+id/green"
+                android:text="Green"/>
+
+            <RadioButton
+                android:id="@+id/blue"
+                android:text="Blue"/>
+        </RadioGroup>
+
+        <!-- Buttons -->
+
+        <Button
+            android:id="@+id/displayBtn"
+            android:text="Display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/clearBtn"
+            android:text="Clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/exitBtn"
+            android:text="Exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Result Label -->
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+Slip 6
+package com.example.a6;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText email, password, location;
+
+    Button loginBtn, searchBtn;
+
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Login Views
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+
+        loginBtn = findViewById(R.id.loginBtn);
+
+        // Map Views
+        location = findViewById(R.id.location);
+
+        searchBtn = findViewById(R.id.searchBtn);
+
+        // Result
+        result = findViewById(R.id.result);
+
+        // Login Validation
+        loginBtn.setOnClickListener(v -> validateLogin());
+
+        // Google Map Search
+        searchBtn.setOnClickListener(v -> searchLocation());
+    }
+
+    // Login Validation Method
+    private void validateLogin() {
+
+        String userEmail =
+                email.getText().toString().trim();
+
+        String userPass =
+                password.getText().toString().trim();
+
+        // Email Empty Check
+        if (userEmail.isEmpty()) {
+
+            email.setError("Email Required");
+
+            email.requestFocus();
+
+            return;
+        }
+
+        // Email Format Check
+        if (!Patterns.EMAIL_ADDRESS
+                .matcher(userEmail)
+                .matches()) {
+
+            email.setError("Invalid Email");
+
+            email.requestFocus();
+
+            return;
+        }
+
+        // Password Check
+        if (userPass.isEmpty()) {
+
+            password.setError("Password Required");
+
+            password.requestFocus();
+
+            return;
+        }
+
+        // Password Length
+        if (userPass.length() < 6) {
+
+            password.setError(
+                    "Password must be 6 characters");
+
+            password.requestFocus();
+
+            return;
+        }
+
+        result.setText("Login Successful");
+    }
+
+    // Google Map Search Method
+    private void searchLocation() {
+
+        String loc =
+                location.getText().toString();
+
+        if (loc.isEmpty()) {
+
+            Toast.makeText(this,
+                    "Enter Location",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        Uri uri =
+                Uri.parse("geo:0,0?q="
+                        + Uri.encode(loc));
+
+        Intent intent =
+                new Intent(Intent.ACTION_VIEW, uri);
+
+        intent.setPackage(
+                "com.google.android.apps.maps");
+
+        startActivity(intent);
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Login Form -->
+
+        <TextView
+            android:text="Login Form"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Google Map Search -->
+
+        <TextView
+            android:text="Google Map Search"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/location"
+            android:hint="Enter Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:text="Search Location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Result -->
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+Slip 9
+package com.example.a9;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Palindrome
+    EditText getnum;
+    Button checkBtn;
+
+    // Calculator
+    EditText num1, num2;
+    Button add, sub, mul, div;
+
+    // Result
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Palindrome
+        getnum = findViewById(R.id.getnum);
+        checkBtn = findViewById(R.id.checkBtn);
+
+        // Calculator
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+
+        add = findViewById(R.id.add);
+        sub = findViewById(R.id.sub);
+        mul = findViewById(R.id.mul);
+        div = findViewById(R.id.div);
+
+        // Result
+        result = findViewById(R.id.result);
+
+        // Palindrome Check
+        checkBtn.setOnClickListener(v -> checkPalindrome());
+
+        // Calculator Operations
+        add.setOnClickListener(v -> calculate("+"));
+
+        sub.setOnClickListener(v -> calculate("-"));
+
+        mul.setOnClickListener(v -> calculate("*"));
+
+        div.setOnClickListener(v -> calculate("/"));
+    }
+
+    // Palindrome Program
+    private void checkPalindrome() {
+
+        String input =
+                getnum.getText().toString();
+
+        if (input.isEmpty()) {
+
+            result.setText("Enter Number");
+
+            return;
+        }
+
+        int num = Integer.parseInt(input);
+
+        int original = num;
+
+        int reverse = 0;
+
+        while (num > 0) {
+
+            int digit = num % 10;
+
+            reverse = reverse * 10 + digit;
+
+            num = num / 10;
+        }
+
+        if (original == reverse) {
+
+            result.setText(
+                    original + " is Palindrome");
+
+        } else {
+
+            result.setText(
+                    original + " is NOT Palindrome");
+        }
+    }
+
+    // Calculator Program
+    private void calculate(String op) {
+
+        String n1 =
+                num1.getText().toString();
+
+        String n2 =
+                num2.getText().toString();
+
+        if (n1.isEmpty() || n2.isEmpty()) {
+
+            result.setText("Enter Both Numbers");
+
+            return;
+        }
+
+        double a = Double.parseDouble(n1);
+
+        double b = Double.parseDouble(n2);
+
+        double res = 0;
+
+        switch (op) {
+
+            case "+":
+                res = a + b;
+                break;
+
+            case "-":
+                res = a - b;
+                break;
+
+            case "*":
+                res = a * b;
+                break;
+
+            case "/":
+
+                if (b == 0) {
+
+                    result.setText(
+                            "Cannot Divide By Zero");
+
+                    return;
+                }
+
+                res = a / b;
+                break;
+        }
+
+        result.setText("Calculator Result = " + res);
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Palindrome Section -->
+
+        <TextView
+            android:text="Palindrome Number Check"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/getnum"
+            android:hint="Enter Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/checkBtn"
+            android:text="Check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Calculator Section -->
+
+        <TextView
+            android:text="Simple Calculator"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num1"
+            android:hint="Enter First Number"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num2"
+            android:hint="Enter Second Number"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/add"
+                android:text="+"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/sub"
+                android:text="-"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/mul"
+                android:text="*"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/div"
+                android:text="/"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Result -->
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+Slip 10
+package com.example.a10;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Armstrong
+    EditText getnum;
+    Button checkBtn;
+
+    // Spinner GUI
+    Spinner spinner;
+    Button applyBtn, resetBtn;
+    LinearLayout layout;
+
+    String[] colors = {
+            "Select Color",
+            "Red",
+            "Green",
+            "Blue",
+            "Yellow"
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Armstrong
+        getnum = findViewById(R.id.getnum);
+        checkBtn = findViewById(R.id.checkBtn);
+
+        // Spinner GUI
+        spinner = findViewById(R.id.spinner);
+
+        applyBtn = findViewById(R.id.applyBtn);
+
+        resetBtn = findViewById(R.id.resetBtn);
+
+        layout = findViewById(R.id.layout);
+
+        // Spinner Adapter
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(
+                        this,
+                        android.R.layout.simple_spinner_dropdown_item,
+                        colors
+                );
+
+        spinner.setAdapter(adapter);
+
+        // Armstrong Button
+        checkBtn.setOnClickListener(v -> checkArmstrong());
+
+        // Apply Button
+        applyBtn.setOnClickListener(v -> applyColor());
+
+        // Reset Button
+        resetBtn.setOnClickListener(v -> {
+            layout.setBackgroundColor(Color.WHITE);
+            spinner.setSelection(0);
+        });
+    }
+
+    // Armstrong Program
+    private void checkArmstrong() {
+
+        String input =
+                getnum.getText().toString();
+
+        if (input.isEmpty()) {
+
+            Toast.makeText(this,
+                    "Enter Number",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        int num = Integer.parseInt(input);
+
+        int original = num;
+
+        int sum = 0;
+
+        while (num > 0) {
+
+            int digit = num % 10;
+
+            sum = sum + (digit * digit * digit);
+
+            num = num / 10;
+        }
+
+        if (sum == original) {
+
+            Toast.makeText(this,
+                    original + " is Armstrong Number",
+                    Toast.LENGTH_LONG).show();
+
+        } else {
+
+            Toast.makeText(this,
+                    original + " is NOT Armstrong Number",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // Spinner GUI Program
+    private void applyColor() {
+
+        String selected =
+                spinner.getSelectedItem().toString();
+
+        switch (selected) {
+
+            case "Red":
+                layout.setBackgroundColor(Color.RED);
+                break;
+
+            case "Green":
+                layout.setBackgroundColor(Color.GREEN);
+                break;
+
+            case "Blue":
+                layout.setBackgroundColor(Color.BLUE);
+                break;
+
+            case "Yellow":
+                layout.setBackgroundColor(Color.YELLOW);
+                break;
+
+            default:
+
+                Toast.makeText(this,
+                        "Select Color",
+                        Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Armstrong Number -->
+
+        <TextView
+            android:text="Armstrong Number Check"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/getnum"
+            android:hint="Enter Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/checkBtn"
+            android:text="Check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Spinner GUI -->
+
+        <TextView
+            android:text="Spinner GUI"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/applyBtn"
+            android:text="Apply Color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/resetBtn"
+            android:text="Reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+Slip 13
+package com.example.a13;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Registration Form
+    EditText name, email, password, confirmPassword;
+    Button registerBtn;
+
+    // ListView
+    EditText itemInput;
+    Button addBtn, deleteBtn, searchBtn;
+    ListView listView;
+
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Registration Views
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        confirmPassword = findViewById(R.id.confirmPassword);
+
+        registerBtn = findViewById(R.id.registerBtn);
+
+        // ListView Views
+        itemInput = findViewById(R.id.itemInput);
+
+        addBtn = findViewById(R.id.addBtn);
+        deleteBtn = findViewById(R.id.deleteBtn);
+        searchBtn = findViewById(R.id.searchBtn);
+
+        listView = findViewById(R.id.listView);
+
+        // List Setup
+        list = new ArrayList<>();
+
+        adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                list
+        );
+
+        listView.setAdapter(adapter);
+
+        // Registration Button
+        registerBtn.setOnClickListener(v -> validateForm());
+
+        // Insert
+        addBtn.setOnClickListener(v -> {
+
+            String item =
+                    itemInput.getText().toString();
+
+            if (!item.isEmpty()) {
+
+                list.add(item);
+
+                adapter.notifyDataSetChanged();
+
+                itemInput.setText("");
+
+            } else {
+
+                Toast.makeText(this,
+                        "Enter Item",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Delete
+        deleteBtn.setOnClickListener(v -> {
+
+            String item =
+                    itemInput.getText().toString();
+
+            if (list.contains(item)) {
+
+                list.remove(item);
+
+                adapter.notifyDataSetChanged();
+
+                Toast.makeText(this,
+                        "Item Deleted",
+                        Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                Toast.makeText(this,
+                        "Item Not Found",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Search
+        searchBtn.setOnClickListener(v -> {
+
+            String item =
+                    itemInput.getText().toString();
+
+            if (list.contains(item)) {
+
+                Toast.makeText(this,
+                        "Item Found",
+                        Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                Toast.makeText(this,
+                        "Item Not Found",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Registration Validation
+    private void validateForm() {
+
+        String userName =
+                name.getText().toString().trim();
+
+        String userEmail =
+                email.getText().toString().trim();
+
+        String userPass =
+                password.getText().toString().trim();
+
+        String userConfirm =
+                confirmPassword.getText().toString().trim();
+
+        // Name Check
+        if (userName.isEmpty()) {
+
+            name.setError("Enter Name");
+
+            return;
+        }
+
+        // Email Check
+        if (!Patterns.EMAIL_ADDRESS
+                .matcher(userEmail)
+                .matches()) {
+
+            email.setError("Invalid Email");
+
+            return;
+        }
+
+        // Password Check
+        if (userPass.length() < 6) {
+
+            password.setError(
+                    "Password must be 6 characters");
+
+            return;
+        }
+
+        // Confirm Password
+        if (!userPass.equals(userConfirm)) {
+
+            confirmPassword.setError(
+                    "Password Not Match");
+
+            return;
+        }
+
+        Toast.makeText(this,
+                "Registration Successful",
+                Toast.LENGTH_LONG).show();
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Registration Form -->
+
+        <TextView
+            android:text="Registration Form"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:hint="Enter Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:text="Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- ListView Operations -->
+
+        <TextView
+            android:text="ListView Operations"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/itemInput"
+            android:hint="Enter Item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/addBtn"
+                android:text="Insert"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:text="Delete"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/searchBtn"
+                android:text="Search"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+Slip 14
+package com.example.a14;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Factorial
+    EditText number;
+    Button factBtn;
+    TextView result;
+
+    // Login
+    EditText username, password;
+    Button loginBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Factorial Views
+        number = findViewById(R.id.number);
+
+        factBtn = findViewById(R.id.factBtn);
+
+        result = findViewById(R.id.result);
+
+        // Login Views
+        username = findViewById(R.id.username);
+
+        password = findViewById(R.id.password);
+
+        loginBtn = findViewById(R.id.loginBtn);
+
+        // Factorial Button
+        factBtn.setOnClickListener(v -> calculateFactorial());
+
+        // Login Button
+        loginBtn.setOnClickListener(v -> checkLogin());
+    }
+
+    // Factorial Program
+    private void calculateFactorial() {
+
+        String input =
+                number.getText().toString();
+
+        if (input.isEmpty()) {
+
+            result.setText("Enter Number");
+
+            return;
+        }
+
+        int num = Integer.parseInt(input);
+
+        long fact = 1;
+
+        for (int i = 1; i <= num; i++) {
+
+            fact = fact * i;
+        }
+
+        result.setText(
+                "Factorial of " + num + " = " + fact);
+    }
+
+    // Login Program
+    private void checkLogin() {
+
+        String user =
+                username.getText().toString();
+
+        String pass =
+                password.getText().toString();
+
+        if (user.equals(pass)) {
+
+            Toast.makeText(this,
+                    "Login Successful...",
+                    Toast.LENGTH_LONG).show();
+
+        } else {
+
+            Toast.makeText(this,
+                    "Invalid Login",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Factorial Section -->
+
+        <TextView
+            android:text="Factorial Program"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/number"
+            android:hint="Enter Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/factBtn"
+            android:text="Calculate Factorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Login Form -->
+
+        <TextView
+            android:text="Login Form"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:hint="Enter Username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:text="LOGIN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+Slip 15
+package com.example.a15;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Calculator
+    EditText num1, num2;
+
+    Button addBtn, subBtn, mulBtn, divBtn;
+
+    // Bank App
+    Spinner spinner;
+
+    Button showBtn;
+
+    TextView result;
+
+    String[] menuItems = {
+            "Select Menu",
+            "Account Number",
+            "Account Type",
+            "Balance",
+            "Checking",
+            "Saving",
+            "Create Account",
+            "Withdraw",
+            "Deposit"
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Calculator Views
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+
+        addBtn = findViewById(R.id.addBtn);
+        subBtn = findViewById(R.id.subBtn);
+        mulBtn = findViewById(R.id.mulBtn);
+        divBtn = findViewById(R.id.divBtn);
+
+        // Bank Views
+        spinner = findViewById(R.id.spinner);
+
+        showBtn = findViewById(R.id.showBtn);
+
+        result = findViewById(R.id.result);
+
+        // Spinner Adapter
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(
+                        this,
+                        android.R.layout.simple_spinner_dropdown_item,
+                        menuItems
+                );
+
+        spinner.setAdapter(adapter);
+
+        // Calculator Buttons
+        addBtn.setOnClickListener(v -> calculate("+"));
+
+        subBtn.setOnClickListener(v -> calculate("-"));
+
+        mulBtn.setOnClickListener(v -> calculate("*"));
+
+        divBtn.setOnClickListener(v -> calculate("/"));
+
+        // Bank Menu Button
+        showBtn.setOnClickListener(v -> showMenu());
+    }
+
+    // Calculator Program
+    private void calculate(String op) {
+
+        String n1 =
+                num1.getText().toString();
+
+        String n2 =
+                num2.getText().toString();
+
+        if (n1.isEmpty() || n2.isEmpty()) {
+
+            Toast.makeText(this,
+                    "Enter Both Numbers",
+                    Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+        double a = Double.parseDouble(n1);
+
+        double b = Double.parseDouble(n2);
+
+        double res = 0;
+
+        switch (op) {
+
+            case "+":
+                res = a + b;
+                break;
+
+            case "-":
+                res = a - b;
+                break;
+
+            case "*":
+                res = a * b;
+                break;
+
+            case "/":
+
+                if (b == 0) {
+
+                    Toast.makeText(this,
+                            "Cannot Divide By Zero",
+                            Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
+                res = a / b;
+                break;
+        }
+
+        Toast.makeText(this,
+                "Result = " + res,
+                Toast.LENGTH_LONG).show();
+    }
+
+    // Bank Menu Program
+    private void showMenu() {
+
+        String selected =
+                spinner.getSelectedItem().toString();
+
+        switch (selected) {
+
+            case "Account Number":
+
+                result.setText("Account No : 123456789");
+                break;
+
+            case "Account Type":
+
+                result.setText("Account Type : Saving");
+                break;
+
+            case "Balance":
+
+                result.setText("Balance : ₹50,000");
+                break;
+
+            case "Checking":
+
+                result.setText("Checking Account Selected");
+                break;
+
+            case "Saving":
+
+                result.setText("Saving Account Selected");
+                break;
+
+            case "Create Account":
+
+                result.setText("New Account Created");
+                break;
+
+            case "Withdraw":
+
+                result.setText("Withdraw Successful");
+                break;
+
+            case "Deposit":
+
+                result.setText("Deposit Successful");
+                break;
+
+            default:
+
+                result.setText("Select Valid Menu");
+        }
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Calculator Section -->
+
+        <TextView
+            android:text="Calculator App"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num1"
+            android:hint="Enter First Number"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num2"
+            android:hint="Enter Second Number"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/addBtn"
+                android:text="ADD"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/subBtn"
+                android:text="SUB"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/mulBtn"
+                android:text="MULT"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/divBtn"
+                android:text="DIV"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Bank App Section -->
+
+        <TextView
+            android:text="Bank Menu App"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/showBtn"
+            android:text="Show Menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="18sp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+Slip 16
+MainActivty.java
+package com.example.a16;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button helloBtn, sendBtn;
+
+    EditText playerName;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        helloBtn = findViewById(R.id.helloBtn);
+
+        sendBtn = findViewById(R.id.sendBtn);
+
+        playerName = findViewById(R.id.playerName);
+
+        // Q1 - Send Hello Message
+        helloBtn.setOnClickListener(v -> {
+
+            Intent intent =
+                    new Intent(MainActivity.this,
+                            SecondActivity.class);
+
+            intent.putExtra("message",
+                    "Hello");
+
+            startActivity(intent);
+        });
+
+        // Q2 - Send Player Name
+        sendBtn.setOnClickListener(v -> {
+
+            String name =
+                    playerName.getText().toString();
+
+            Intent intent =
+                    new Intent(MainActivity.this,
+                            SecondActivity.class);
+
+            intent.putExtra("message",
+                    "Player Name : " + name);
+
+            startActivity(intent);
+        });
+    }
+}
+
+SecondActivity.java
+package com.example.a16;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SecondActivity extends AppCompatActivity {
+
+    TextView result;
+
+    Button backBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+
+        result = findViewById(R.id.result);
+
+        backBtn = findViewById(R.id.backBtn);
+
+        // Receive Intent Data
+        String msg =
+                getIntent().getStringExtra("message");
+
+        result.setText(msg);
+
+        // Back Button
+        backBtn.setOnClickListener(v -> finish());
+    }
+}
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Hello Message -->
+
+    <TextView
+        android:text="Send Hello Message"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/helloBtn"
+        android:text="Send Hello"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Player Name -->
+
+    <TextView
+        android:text="Player Name Activity"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/playerName"
+        android:hint="Enter Player Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/sendBtn"
+        android:text="Send Player Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+activity_second.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/result"
+        android:text="Result"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/backBtn"
+        android:text="BACK"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+
+
+
+Slip 19
+package com.example.a19;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Image Program
+    ImageView imageView;
+    Button changeBtn;
+
+    int[] images = {
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3
+    };
+
+    int index = 0;
+
+    // Menu Program
+    EditText number;
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Image Views
+        imageView = findViewById(R.id.imageView);
+
+        changeBtn = findViewById(R.id.changeBtn);
+
+        // Number Views
+        number = findViewById(R.id.number);
+
+        result = findViewById(R.id.result);
+
+        // First Image
+        imageView.setImageResource(images[index]);
+
+        // Change Image Button
+        changeBtn.setOnClickListener(v -> {
+
+            index = (index + 1) % images.length;
+
+            imageView.setImageResource(images[index]);
+        });
+    }
+
+    // Create Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(
+                R.menu.menu_main,
+                menu
+        );
+
+        return true;
+    }
+
+    // Menu Click
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        String input =
+                number.getText().toString();
+
+        if (input.isEmpty()) {
+
+            result.setText("Enter Number");
+
+            return true;
+        }
+
+        int num = Integer.parseInt(input);
+
+        // Factorial
+        if (item.getItemId() == R.id.factorial) {
+
+            long fact = 1;
+
+            for (int i = 1; i <= num; i++) {
+
+                fact = fact * i;
+            }
+
+            result.setText(
+                    "Factorial = " + fact);
+        }
+
+        // Sum Of Digits
+        else if (item.getItemId() == R.id.sumdigits) {
+
+            int sum = 0;
+
+            int temp = num;
+
+            while (temp > 0) {
+
+                sum = sum + temp % 10;
+
+                temp = temp / 10;
+            }
+
+            result.setText(
+                    "Sum Of Digits = " + sum);
+        }
+
+        return true;
+    }
+}
+
+(Create inside res/menu/menu_main.xml)
+menu_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/factorial"
+        android:title="Find Factorial"/>
+
+    <item
+        android:id="@+id/sumdigits"
+        android:title="Find Sum Of Digits"/>
+
+</menu>
+
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Image Change -->
+
+        <TextView
+            android:text="Change Image Program"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/changeBtn"
+            android:text="Change Image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Menu Program -->
+
+        <TextView
+    android:text="Factorial &amp; Sum of Digits"
+    android:textSize="22sp"
+    android:textStyle="bold"
+    android:layout_marginTop="30dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/number"
+            android:hint="Enter Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="20sp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+Slip 20
+package com.example.a20;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Number Validation
+    EditText num1, num2;
+    Button displayBtn;
+    TextView result;
+
+    // Email
+    EditText email, subject, message;
+    Button sendBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Number Validation Views
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+
+        displayBtn = findViewById(R.id.displayBtn);
+
+        result = findViewById(R.id.result);
+
+        // Email Views
+        email = findViewById(R.id.email);
+
+        subject = findViewById(R.id.subject);
+
+        message = findViewById(R.id.message);
+
+        sendBtn = findViewById(R.id.sendBtn);
+
+        // Number Validation Button
+        displayBtn.setOnClickListener(v -> validateNumbers());
+
+        // Send Email Button
+        sendBtn.setOnClickListener(v -> sendEmail());
+    }
+
+    // Q1 Program
+    private void validateNumbers() {
+
+        String n1 =
+                num1.getText().toString();
+
+        String n2 =
+                num2.getText().toString();
+
+        if (n1.isEmpty() || n2.isEmpty()) {
+
+            result.setText("Enter Both Numbers");
+
+            return;
+        }
+
+        int a = Integer.parseInt(n1);
+
+        int b = Integer.parseInt(n2);
+
+        // Reject if both > 20
+        if (a > 20 && b > 20) {
+
+            Toast.makeText(this,
+                    "Both Numbers Greater Than 20. Enter Again",
+                    Toast.LENGTH_LONG).show();
+
+            num1.setText("");
+
+            num2.setText("");
+
+            result.setText("");
+
+        } else {
+
+            result.setText(
+                    "Number 1 = " + a +
+                            "\nNumber 2 = " + b);
+        }
+    }
+
+    // Q2 Program
+    private void sendEmail() {
+
+        String to =
+                email.getText().toString();
+
+        String sub =
+                subject.getText().toString();
+
+        String msg =
+                message.getText().toString();
+
+        Intent intent =
+                new Intent(Intent.ACTION_SEND);
+
+        intent.setType("*/*");
+
+        intent.putExtra(
+                Intent.EXTRA_EMAIL,
+                new String[]{to});
+
+        intent.putExtra(
+                Intent.EXTRA_SUBJECT,
+                sub);
+
+        intent.putExtra(
+                Intent.EXTRA_TEXT,
+                msg);
+
+        // Dummy Attachment
+        Uri uri =
+                Uri.parse(
+                        "android.resource://"
+                                + getPackageName()
+                                + "/drawable/ic_launcher_foreground");
+
+        intent.putExtra(
+                Intent.EXTRA_STREAM,
+                uri);
+
+        startActivity(
+                Intent.createChooser(
+                        intent,
+                        "Send Email"));
+    }
+}
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Number Validation -->
+
+        <TextView
+            android:text="Number Validation"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num1"
+            android:hint="Enter First Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/num2"
+            android:hint="Enter Second Number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/displayBtn"
+            android:text="Display Numbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Email Section -->
+
+        <TextView
+            android:text="Send Email With Attachment"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/subject"
+            android:hint="Enter Subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/message"
+            android:hint="Enter Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:text="Send Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+Slip 23
+package com.example.a23;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Implicit Intent
+    Button openBrowserBtn;
+
+    // Formatting App
+    EditText name, message;
+
+    CheckBox bold, italic, underline;
+
+    RadioGroup colorGroup;
+
+    Button displayBtn, clearBtn, exitBtn;
+
+    TextView result;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Implicit Intent
+        openBrowserBtn =
+                findViewById(R.id.openBrowserBtn);
+
+        // Formatting App
+        name = findViewById(R.id.name);
+
+        message = findViewById(R.id.message);
+
+        bold = findViewById(R.id.bold);
+
+        italic = findViewById(R.id.italic);
+
+        underline = findViewById(R.id.underline);
+
+        colorGroup =
+                findViewById(R.id.colorGroup);
+
+        displayBtn =
+                findViewById(R.id.displayBtn);
+
+        clearBtn =
+                findViewById(R.id.clearBtn);
+
+        exitBtn =
+                findViewById(R.id.exitBtn);
+
+        result =
+                findViewById(R.id.result);
+
+        // Open Browser
+        openBrowserBtn.setOnClickListener(v -> {
+
+            Intent intent =
+                    new Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com")
+                    );
+
+            startActivity(intent);
+        });
+
+        // Display Button
+        displayBtn.setOnClickListener(v -> displayMessage());
+
+        // Clear Button
+        clearBtn.setOnClickListener(v -> clearData());
+
+        // Exit Button
+        exitBtn.setOnClickListener(v -> finish());
+    }
+
+    // Display Message
+    private void displayMessage() {
+
+        String n =
+                name.getText().toString();
+
+        String msg =
+                message.getText().toString();
+
+        result.setText(n + " : " + msg);
+
+        // Bold & Italic
+        int style = Typeface.NORMAL;
+
+        if (bold.isChecked() &&
+                italic.isChecked()) {
+
+            style = Typeface.BOLD_ITALIC;
+
+        } else if (bold.isChecked()) {
+
+            style = Typeface.BOLD;
+
+        } else if (italic.isChecked()) {
+
+            style = Typeface.ITALIC;
+        }
+
+        result.setTypeface(null, style);
+
+        // Underline
+        if (underline.isChecked()) {
+
+            result.setPaintFlags(
+                    result.getPaintFlags()
+                            | Paint.UNDERLINE_TEXT_FLAG);
+
+        } else {
+
+            result.setPaintFlags(
+                    result.getPaintFlags()
+                            & (~Paint.UNDERLINE_TEXT_FLAG));
+        }
+
+        // Color
+        int selected =
+                colorGroup.getCheckedRadioButtonId();
+
+        if (selected == R.id.red) {
+
+            result.setTextColor(Color.RED);
+
+        } else if (selected == R.id.green) {
+
+            result.setTextColor(Color.GREEN);
+
+        } else if (selected == R.id.blue) {
+
+            result.setTextColor(Color.BLUE);
+        }
+    }
+
+    // Clear Method
+    private void clearData() {
+
+        name.setText("");
+
+        message.setText("");
+
+        result.setText("");
+
+        bold.setChecked(false);
+
+        italic.setChecked(false);
+
+        underline.setChecked(false);
+
+        colorGroup.clearCheck();
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Implicit Intent -->
+
+        <TextView
+            android:text="Implicit Intent"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/openBrowserBtn"
+            android:text="Open Google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Formatting Program -->
+
+        <TextView
+            android:text="Text Formatting App"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:hint="Enter Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/message"
+            android:hint="Enter Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- CheckBoxes -->
+
+        <CheckBox
+            android:id="@+id/bold"
+            android:text="Bold"/>
+
+        <CheckBox
+            android:id="@+id/italic"
+            android:text="Italic"/>
+
+        <CheckBox
+            android:id="@+id/underline"
+            android:text="Underline"/>
+
+        <!-- Radio Buttons -->
+
+        <RadioGroup
+            android:id="@+id/colorGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/red"
+                android:text="Red"/>
+
+            <RadioButton
+                android:id="@+id/green"
+                android:text="Green"/>
+
+            <RadioButton
+                android:id="@+id/blue"
+                android:text="Blue"/>
+        </RadioGroup>
+
+        <!-- Buttons -->
+
+        <Button
+            android:id="@+id/displayBtn"
+            android:text="Display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/clearBtn"
+            android:text="Clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/exitBtn"
+            android:text="Exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Result -->
+
+        <TextView
+            android:id="@+id/result"
+            android:text="Result"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+Slip 25
+package com.example.a25;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    // SMS
+    EditText phone, message;
+
+    Button sendBtn;
+
+    // Login
+    EditText username, password;
+
+    Button loginBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // SMS Views
+        phone = findViewById(R.id.phone);
+
+        message = findViewById(R.id.message);
+
+        sendBtn = findViewById(R.id.sendBtn);
+
+        // Login Views
+        username = findViewById(R.id.username);
+
+        password = findViewById(R.id.password);
+
+        loginBtn = findViewById(R.id.loginBtn);
+
+        // Send SMS
+        sendBtn.setOnClickListener(v -> sendSMS());
+
+        // Login
+        loginBtn.setOnClickListener(v -> checkLogin());
+    }
+
+    // SMS Program
+    private void sendSMS() {
+
+        String mobile =
+                phone.getText().toString();
+
+        String msg =
+                message.getText().toString();
+
+        Intent intent =
+                new Intent(Intent.ACTION_VIEW);
+
+        intent.setData(Uri.parse("sms:" + mobile));
+
+        intent.putExtra("sms_body", msg);
+
+        startActivity(intent);
+    }
+
+    // Login Program
+    private void checkLogin() {
+
+        String user =
+                username.getText().toString();
+
+        String pass =
+                password.getText().toString();
+
+        if (user.equals(pass)) {
+
+            Toast.makeText(this,
+                    "Login Successful...",
+                    Toast.LENGTH_LONG).show();
+
+        } else {
+
+            Toast.makeText(this,
+                    "Invalid Login",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+}
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- SMS Activity -->
+
+        <TextView
+            android:text="SMS Activity"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/phone"
+            android:hint="Enter Phone Number"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/message"
+            android:hint="Enter Message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:text="Send SMS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Login Form -->
+
+        <TextView
+            android:text="Login Form"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                    android:text="Username"
+                    android:padding="10dp"/>
+
+                <EditText
+                    android:id="@+id/username"
+                    android:hint="Enter Username"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="Password"
+                    android:padding="10dp"/>
+
+                <EditText
+                    android:id="@+id/password"
+                    android:hint="Enter Password"
+                    android:inputType="textPassword"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:text="LOGIN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>
