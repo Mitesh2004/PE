@@ -1,1 +1,28 @@
+# 1. Open terminal
+Ctrl + Alt + T
 
+# 2. Go to Downloads folder
+cd ~/Downloads
+
+# 3. Extract Android Studio file
+tar -xvf android-studio-*.tar.gz
+
+# 4. Move it to /opt
+sudo mv android-studio /opt/
+
+# 5. Install required packages
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+
+# 6. Start Android Studio
+/opt/android-studio/bin/studio.sh
+
+After Android Studio opens: Next → Standard → Finish
+
+Then wait for SDK download to complete.
+
+Optional shortcut command:
+sudo ln -s /opt/android-studio/bin/studio.sh /usr/local/bin/android-studio
+
+Now you can open anytime using:
+android-studio
