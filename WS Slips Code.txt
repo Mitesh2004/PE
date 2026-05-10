@@ -1,0 +1,1718 @@
+Slip 1-(q1,q10)
+Fact.java
+package perform;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Fact extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int n=Integer.parseInt(request.getParameter("t1"));
+			int fact=1;
+			for(int i=1;i<=n;i++)
+			{
+				fact=fact*i;
+			}
+			out.println("fact of n is " + fact);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+	<display-name>Fact</display-name>
+	<servlet-name>Fact</servlet-name>
+	<servlet-class>perform.Fact</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Fact</servlet-name>
+	<url-pattern>/Fact</url-pattern>
+</servlet-mapping>
+
+
+index.html
+<html>
+<body>
+<form method="get" action="Fact">
+	Enter a Number: <input type="text" name="t1">
+	<input type="submit" value="Calculate factorial">
+</form>
+</body>
+</html>
+
+
+q10
+Converter.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Converter extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float rup=Float.parseFloat(request.getParameter("t1"));
+			double d3=(rup*65.25);
+			double d4=(rup*85);
+			double d5=(rup*110);
+			out.println(" dollar="+d3);
+			out.println(" euro="+d4);
+			out.println(" pond="+d5);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Converter</display-name>
+    <servlet-name>Converter</servlet-name>
+    <servlet-class>pract.Converter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Converter</servlet-name>
+    <url-pattern>/Converter</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="Converter">
+Enter a Rupees:<input type=text name=t1>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+Slip 2-(q2,q3)
+Practical2.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical2 extends HttpServlet {
+  long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("t1");
+			out.println("Hi "+s);
+			GregorianCalendar time=new GregorianCalendar();
+			int hour=time.get(Calendar.HOUR_OF_DAY);
+			int min=time.get(Calendar.MINUTE);
+			int day=time.get(Calendar.DAY_OF_MONTH);
+			int month=time.get(Calendar.MONTH)+1;
+			int year=time.get(Calendar.YEAR);
+			out.println("\n The Current time is \t" +hour+ ":" +min );
+			out.println("\n Today's date is \t" +month+ "/" +day+ "/" +year);
+			if(hour < 12 )
+				out.println("\n Good Morning");
+			else if(hour <17 &&!(hour == 12))
+				out.println("\n Good Afternoon");
+			else if(hour == 12)
+				out.println("\n Good Noon");
+			else
+				out.println("\n Good Evening");
+		}catch(Exception e) {
+			out.println("Hi "+e);
+		}
+	}         
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Practical2</display-name>
+    <servlet-name>Practical2</servlet-name>
+    <servlet-class>demo.Practical2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical2</servlet-name>
+    <url-pattern>/Practical2</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical2>
+	Enter a String:<input type=text name=t1>
+	<br>
+	<input type=submit value="Greet">
+	</form>
+</body>
+</html>
+
+q3
+Practical3.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float n =Float.parseFloat(request.getParameter("t1"));
+			float Fahrenheit;
+			Fahrenheit=((n*9)/5)+32;
+			out.println("    fahrenheit  " +Fahrenheit);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+web.xml
+<servlet>
+    <display-name>Practical3</display-name>
+    <servlet-name>Practical3</servlet-name>
+    <servlet-class>demo.Practical3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical3</servlet-name>
+    <url-pattern>/Practical3</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical3>
+	Enter a Number:<input type=text name=t1>
+	<br>
+	<input type=submit value="Convert">
+	</form>
+</body>
+</html>
+
+
+Slip 9-(q2,q9)
+Practical2.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical2 extends HttpServlet {
+  long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("t1");
+			out.println("Hi "+s);
+			GregorianCalendar time=new GregorianCalendar();
+			int hour=time.get(Calendar.HOUR_OF_DAY);
+			int min=time.get(Calendar.MINUTE);
+			int day=time.get(Calendar.DAY_OF_MONTH);
+			int month=time.get(Calendar.MONTH)+1;
+			int year=time.get(Calendar.YEAR);
+			out.println("\n The Current time is \t" +hour+ ":" +min );
+			out.println("\n Today's date is \t" +month+ "/" +day+ "/" +year);
+			if(hour < 12 )
+				out.println("\n Good Morning");
+			else if(hour <17 &&!(hour == 12))
+				out.println("\n Good Afternoon");
+			else if(hour == 12)
+				out.println("\n Good Noon");
+			else
+				out.println("\n Good Evening");
+		}catch(Exception e) {
+			out.println("Hi "+e);
+		}
+	}         
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Practical2</display-name>
+    <servlet-name>Practical2</servlet-name>
+    <servlet-class>demo.Practical2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical2</servlet-name>
+    <url-pattern>/Practical2</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical2>
+	Enter a String:<input type=text name=t1>
+	<br>
+	<input type=submit value="Greet">
+	</form>
+</body>
+</html>
+
+
+q9
+Phnovalidate.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Phnovalidate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		  response.setContentType("text/html");
+	        PrintWriter out = null;
+	        try {
+				out=response.getWriter();
+				String mobilenumber=request.getParameter("p1");
+				boolean isValid=isValidMobilenumber(mobilenumber);
+				out.println(" MoboleNumber :"+mobilenumber);
+				out.println(" Valid "+isValid);
+		}catch(Exception e) {
+			out.println("Error"+e.getLocalizedMessage());
+		}
+	}	
+	private boolean isValidMobilenumber(String mobilenumber) {	
+			return false;
+		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Phnovalidate</display-name>
+    <servlet-name>Phnovalidate</servlet-name>
+    <servlet-class>pract.Phnovalidate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Phnovalidate</servlet-name>
+    <url-pattern>/Phnovalidate</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method="get" action="Phnovalidate">
+	Enter Phoneno:<input type="number" name=p1>
+	<br>
+	<input type="submit" value=Validate>
+	</form>
+</body>
+</html>
+
+
+
+Slip 10-(q11,q10)
+KgToGm.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class KgToGm extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int kg=Integer.parseInt(request.getParameter("num1"));
+			int fo=(kg*1000);
+			out.println("The value in Grams is: "+fo);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>KgToGm</display-name>
+    <servlet-name>KgToGm</servlet-name>
+    <servlet-class>pract.KgToGm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KgToGm</servlet-name>
+    <url-pattern>/KgToGm</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="KgToGm">
+Enter a Weight:<input type=text name=num1>
+<br>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+q10
+Converter.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Converter extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float rup=Float.parseFloat(request.getParameter("t1"));
+			double d3=(rup*65.25);
+			double d4=(rup*85);
+			double d5=(rup*110);
+			out.println(" dollar="+d3);
+			out.println(" euro="+d4);
+			out.println(" pond="+d5);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Converter</display-name>
+    <servlet-name>Converter</servlet-name>
+    <servlet-class>pract.Converter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Converter</servlet-name>
+    <url-pattern>/Converter</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="Converter">
+Enter a Rupees:<input type=text name=t1>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+Slip 11-(q13,q14)
+NumVowel.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class NumVowel extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("s1");
+			s=s.toLowerCase();
+			int count=0;
+			for(int i=0;i<s.length();i++) {
+				if(s.charAt(i)=='a'|| s.charAt(i)=='e'||s.charAt(i)=='i'||s.charAt(i)=='o'||s.charAt(i)=='u') {
+					count++;
+				}
+			}
+			out.println("Total no of vowels in string are:"+count);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>NumVowel</display-name>
+    <servlet-name>NumVowel</servlet-name>
+    <servlet-class>pract.NumVowel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NumVowel</servlet-name>
+    <url-pattern>/NumVowel</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method="get" action="NumVowel">
+Enter a String:<input type=text name=s1>
+<input type=submit value=Display>
+</form>
+</body>
+</html>
+
+
+q14
+Conversion.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Conversion extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int num=Integer.parseInt(request.getParameter("n1"));
+			String hexa=Integer.toHexString(num);
+			String octal=Integer.toOctalString(num);
+			String binary=Integer.toBinaryString(num);
+			out.println("HexaDecimal value is: "+hexa);
+			out.println("OctalDecimal value is: "+octal);
+			out.println("BinaryDecimal value is: "+binary);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+  <servlet>
+    <display-name>Conversion</display-name>
+    <servlet-name>Conversion</servlet-name>
+    <servlet-class>pract.Conversion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Conversion</servlet-name>
+    <url-pattern>/Conversion</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="Conversion">
+Enter a Number:<input type=text name=n1>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+Slip 13-(q13,q10)
+NumVowel.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class NumVowel extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("s1");
+			s=s.toLowerCase();
+			int count=0;
+			for(int i=0;i<s.length();i++) {
+				if(s.charAt(i)=='a'|| s.charAt(i)=='e'||s.charAt(i)=='i'||s.charAt(i)=='o'||s.charAt(i)=='u') {
+					count++;
+				}
+			}
+			out.println("Total no of vowels in string are:"+count);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>NumVowel</display-name>
+    <servlet-name>NumVowel</servlet-name>
+    <servlet-class>pract.NumVowel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NumVowel</servlet-name>
+    <url-pattern>/NumVowel</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method="get" action="NumVowel">
+Enter a String:<input type=text name=s1>
+<input type=submit value=Display>
+</form>
+</body>
+</html>
+
+
+q10
+Converter.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Converter extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float rup=Float.parseFloat(request.getParameter("t1"));
+			double d3=(rup*65.25);
+			double d4=(rup*85);
+			double d5=(rup*110);
+			out.println(" dollar="+d3);
+			out.println(" euro="+d4);
+			out.println(" pond="+d5);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Converter</display-name>
+    <servlet-name>Converter</servlet-name>
+    <servlet-class>pract.Converter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Converter</servlet-name>
+    <url-pattern>/Converter</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="Converter">
+Enter a Rupees:<input type=text name=t1>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+Slip 14-(q1,q3)
+Fact.java
+package perform;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Fact extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int n=Integer.parseInt(request.getParameter("t1"));
+			int fact=1;
+			for(int i=1;i<=n;i++)
+			{
+				fact=fact*i;
+			}
+			out.println("fact of n is " + fact);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+	<display-name>Fact</display-name>
+	<servlet-name>Fact</servlet-name>
+	<servlet-class>perform.Fact</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Fact</servlet-name>
+	<url-pattern>/Fact</url-pattern>
+</servlet-mapping>
+
+
+index.html
+<html>
+<body>
+<form method="get" action="Fact">
+	Enter a Number: <input type="text" name="t1">
+	<input type="submit" value="Calculate factorial">
+</form>
+</body>
+</html>
+
+
+q3
+Practical3.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float n =Float.parseFloat(request.getParameter("t1"));
+			float Fahrenheit;
+			Fahrenheit=((n*9)/5)+32;
+			out.println("    fahrenheit  " +Fahrenheit);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+web.xml
+<servlet>
+    <display-name>Practical3</display-name>
+    <servlet-name>Practical3</servlet-name>
+    <servlet-class>demo.Practical3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical3</servlet-name>
+    <url-pattern>/Practical3</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical3>
+	Enter a Number:<input type=text name=t1>
+	<br>
+	<input type=submit value="Convert">
+	</form>
+</body>
+</html>
+
+
+Slip 16-(q11,q4)
+KgToGm.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class KgToGm extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int kg=Integer.parseInt(request.getParameter("num1"));
+			int fo=(kg*1000);
+			out.println("The value in Grams is: "+fo);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>KgToGm</display-name>
+    <servlet-name>KgToGm</servlet-name>
+    <servlet-class>pract.KgToGm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KgToGm</servlet-name>
+    <url-pattern>/KgToGm</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="KgToGm">
+Enter a Weight:<input type=text name=num1>
+<br>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+q4
+Sample.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Sample extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("s1");
+			out.println("The Price of item " +s);
+			if(s=="pen")
+				out.println("10rs" );
+			else if(s=="pencil")
+				out.println("5rs");
+			else
+				out.println("20rs");	
+	}catch(Exception e) {
+		out.println("Error: " +e.getMessage());
+	}
+}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Sample</display-name>
+    <servlet-name>Sample</servlet-name>
+    <servlet-class>pract.Sample</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Sample</servlet-name>
+    <url-pattern>/Sample</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Sample>
+	Enter an item name:<input type=text name=s1>
+	<br>
+	<input type=submit value="Check">
+	</form>
+</body>
+</html>
+
+
+Slip 17-(q12,q9)
+Rect.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Rect extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int len=Integer.parseInt(request.getParameter("n1"));
+			int bre=Integer.parseInt(request.getParameter("n2"));
+			int wid=Integer.parseInt(request.getParameter("n3"));
+			float area=len*bre;
+			float vol=len*bre*wid;
+			out.println("Area of Rectangle is :" +area);
+			out.println("Volume of Rectangle is :" +vol);
+		}catch(Exception e) {
+			out.println("Error: " +e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+  <servlet>
+    <display-name>Rect</display-name>
+    <servlet-name>Rect</servlet-name>
+    <servlet-class>pract.Rect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Rect</servlet-name>
+    <url-pattern>/Rect</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="Rect">
+Enter a length:<input type=text name=n1>
+<br>
+Enter a breadth:<input type=text name=n2>
+<br>
+Enter a width:<input type=text name=n3>
+<br>
+<input type=submit value=Check>
+</form>
+</body>
+</html>
+
+
+q9
+Phnovalidate.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Phnovalidate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		  response.setContentType("text/html");
+	        PrintWriter out = null;
+	        try {
+				out=response.getWriter();
+				String mobilenumber=request.getParameter("p1");
+				boolean isValid=isValidMobilenumber(mobilenumber);
+				out.println(" MoboleNumber :"+mobilenumber);
+				out.println(" Valid "+isValid);
+		}catch(Exception e) {
+			out.println("Error"+e.getLocalizedMessage());
+		}
+	}	
+	private boolean isValidMobilenumber(String mobilenumber) {	
+			return false;
+		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Phnovalidate</display-name>
+    <servlet-name>Phnovalidate</servlet-name>
+    <servlet-class>pract.Phnovalidate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Phnovalidate</servlet-name>
+    <url-pattern>/Phnovalidate</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method="get" action="Phnovalidate">
+	Enter Phoneno:<input type="number" name=p1>
+	<br>
+	<input type="submit" value=Validate>
+	</form>
+</body>
+</html>
+
+
+Slip 19-(q2,q14)
+Practical2.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical2 extends HttpServlet {
+  long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("t1");
+			out.println("Hi "+s);
+			GregorianCalendar time=new GregorianCalendar();
+			int hour=time.get(Calendar.HOUR_OF_DAY);
+			int min=time.get(Calendar.MINUTE);
+			int day=time.get(Calendar.DAY_OF_MONTH);
+			int month=time.get(Calendar.MONTH)+1;
+			int year=time.get(Calendar.YEAR);
+			out.println("\n The Current time is \t" +hour+ ":" +min );
+			out.println("\n Today's date is \t" +month+ "/" +day+ "/" +year);
+			if(hour < 12 )
+				out.println("\n Good Morning");
+			else if(hour <17 &&!(hour == 12))
+				out.println("\n Good Afternoon");
+			else if(hour == 12)
+				out.println("\n Good Noon");
+			else
+				out.println("\n Good Evening");
+		}catch(Exception e) {
+			out.println("Hi "+e);
+		}
+	}         
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Practical2</display-name>
+    <servlet-name>Practical2</servlet-name>
+    <servlet-class>demo.Practical2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical2</servlet-name>
+    <url-pattern>/Practical2</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical2>
+	Enter a String:<input type=text name=t1>
+	<br>
+	<input type=submit value="Greet">
+	</form>
+</body>
+</html>
+
+
+q14
+Conversion.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Conversion extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int num=Integer.parseInt(request.getParameter("n1"));
+			String hexa=Integer.toHexString(num);
+			String octal=Integer.toOctalString(num);
+			String binary=Integer.toBinaryString(num);
+			out.println("HexaDecimal value is: "+hexa);
+			out.println("OctalDecimal value is: "+octal);
+			out.println("BinaryDecimal value is: "+binary);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+  <servlet>
+    <display-name>Conversion</display-name>
+    <servlet-name>Conversion</servlet-name>
+    <servlet-class>pract.Conversion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Conversion</servlet-name>
+    <url-pattern>/Conversion</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="Conversion">
+Enter a Number:<input type=text name=n1>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+
+Slip 20-(q1,q9)
+Fact.java
+package perform;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Fact extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int n=Integer.parseInt(request.getParameter("t1"));
+			int fact=1;
+			for(int i=1;i<=n;i++)
+			{
+				fact=fact*i;
+			}
+			out.println("fact of n is " + fact);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+	<display-name>Fact</display-name>
+	<servlet-name>Fact</servlet-name>
+	<servlet-class>perform.Fact</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Fact</servlet-name>
+	<url-pattern>/Fact</url-pattern>
+</servlet-mapping>
+
+
+index.html
+<html>
+<body>
+<form method="get" action="Fact">
+	Enter a Number: <input type="text" name="t1">
+	<input type="submit" value="Calculate factorial">
+</form>
+</body>
+</html>
+
+
+q9
+Phnovalidate.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Phnovalidate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		  response.setContentType("text/html");
+	        PrintWriter out = null;
+	        try {
+				out=response.getWriter();
+				String mobilenumber=request.getParameter("p1");
+				boolean isValid=isValidMobilenumber(mobilenumber);
+				out.println(" MoboleNumber :"+mobilenumber);
+				out.println(" Valid "+isValid);
+		}catch(Exception e) {
+			out.println("Error"+e.getLocalizedMessage());
+		}
+	}	
+	private boolean isValidMobilenumber(String mobilenumber) {	
+			return false;
+		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Phnovalidate</display-name>
+    <servlet-name>Phnovalidate</servlet-name>
+    <servlet-class>pract.Phnovalidate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Phnovalidate</servlet-name>
+    <url-pattern>/Phnovalidate</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method="get" action="Phnovalidate">
+	Enter Phoneno:<input type="number" name=p1>
+	<br>
+	<input type="submit" value=Validate>
+	</form>
+</body>
+</html>
+
+
+Slip 21-(q11,q3)
+KgToGm.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class KgToGm extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int kg=Integer.parseInt(request.getParameter("num1"));
+			int fo=(kg*1000);
+			out.println("The value in Grams is: "+fo);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>KgToGm</display-name>
+    <servlet-name>KgToGm</servlet-name>
+    <servlet-class>pract.KgToGm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KgToGm</servlet-name>
+    <url-pattern>/KgToGm</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method=get action="KgToGm">
+Enter a Weight:<input type=text name=num1>
+<br>
+<input type=submit value=Convert>
+</form>
+</body>
+</html>
+
+
+q3
+Practical3.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float n =Float.parseFloat(request.getParameter("t1"));
+			float Fahrenheit;
+			Fahrenheit=((n*9)/5)+32;
+			out.println("    fahrenheit  " +Fahrenheit);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+web.xml
+<servlet>
+    <display-name>Practical3</display-name>
+    <servlet-name>Practical3</servlet-name>
+    <servlet-class>demo.Practical3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical3</servlet-name>
+    <url-pattern>/Practical3</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical3>
+	Enter a Number:<input type=text name=t1>
+	<br>
+	<input type=submit value="Convert">
+	</form>
+</body>
+</html>
+
+
+Slip 22-(q13,q9)
+NumVowel.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class NumVowel extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("s1");
+			s=s.toLowerCase();
+			int count=0;
+			for(int i=0;i<s.length();i++) {
+				if(s.charAt(i)=='a'|| s.charAt(i)=='e'||s.charAt(i)=='i'||s.charAt(i)=='o'||s.charAt(i)=='u') {
+					count++;
+				}
+			}
+			out.println("Total no of vowels in string are:"+count);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>NumVowel</display-name>
+    <servlet-name>NumVowel</servlet-name>
+    <servlet-class>pract.NumVowel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NumVowel</servlet-name>
+    <url-pattern>/NumVowel</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+<form method="get" action="NumVowel">
+Enter a String:<input type=text name=s1>
+<input type=submit value=Display>
+</form>
+</body>
+</html>
+
+
+q9
+Phnovalidate.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Phnovalidate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		  response.setContentType("text/html");
+	        PrintWriter out = null;
+	        try {
+				out=response.getWriter();
+				String mobilenumber=request.getParameter("p1");
+				boolean isValid=isValidMobilenumber(mobilenumber);
+				out.println(" MoboleNumber :"+mobilenumber);
+				out.println(" Valid "+isValid);
+		}catch(Exception e) {
+			out.println("Error"+e.getLocalizedMessage());
+		}
+	}	
+	private boolean isValidMobilenumber(String mobilenumber) {	
+			return false;
+		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Phnovalidate</display-name>
+    <servlet-name>Phnovalidate</servlet-name>
+    <servlet-class>pract.Phnovalidate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Phnovalidate</servlet-name>
+    <url-pattern>/Phnovalidate</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method="get" action="Phnovalidate">
+	Enter Phoneno:<input type="number" name=p1>
+	<br>
+	<input type="submit" value=Validate>
+	</form>
+</body>
+</html>
+
+
+
+Slip 23-(q2,q4)
+Practical2.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical2 extends HttpServlet {
+  long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("t1");
+			out.println("Hi "+s);
+			GregorianCalendar time=new GregorianCalendar();
+			int hour=time.get(Calendar.HOUR_OF_DAY);
+			int min=time.get(Calendar.MINUTE);
+			int day=time.get(Calendar.DAY_OF_MONTH);
+			int month=time.get(Calendar.MONTH)+1;
+			int year=time.get(Calendar.YEAR);
+			out.println("\n The Current time is \t" +hour+ ":" +min );
+			out.println("\n Today's date is \t" +month+ "/" +day+ "/" +year);
+			if(hour < 12 )
+				out.println("\n Good Morning");
+			else if(hour <17 &&!(hour == 12))
+				out.println("\n Good Afternoon");
+			else if(hour == 12)
+				out.println("\n Good Noon");
+			else
+				out.println("\n Good Evening");
+		}catch(Exception e) {
+			out.println("Hi "+e);
+		}
+	}         
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Practical2</display-name>
+    <servlet-name>Practical2</servlet-name>
+    <servlet-class>demo.Practical2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical2</servlet-name>
+    <url-pattern>/Practical2</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical2>
+	Enter a String:<input type=text name=t1>
+	<br>
+	<input type=submit value="Greet">
+	</form>
+</body>
+</html>
+
+
+q4
+Sample.java
+package pract;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class Sample extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			String s=request.getParameter("s1");
+			out.println("The Price of item " +s);
+			if(s=="pen")
+				out.println("10rs" );
+			else if(s=="pencil")
+				out.println("5rs");
+			else
+				out.println("20rs");	
+	}catch(Exception e) {
+		out.println("Error: " +e.getMessage());
+	}
+}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+    <display-name>Sample</display-name>
+    <servlet-name>Sample</servlet-name>
+    <servlet-class>pract.Sample</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Sample</servlet-name>
+    <url-pattern>/Sample</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Sample>
+	Enter an item name:<input type=text name=s1>
+	<br>
+	<input type=submit value="Check">
+	</form>
+</body>
+</html>
+
+
+
+Slip 24-(q1,q3)
+Fact.java
+package perform;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Fact extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			int n=Integer.parseInt(request.getParameter("t1"));
+			int fact=1;
+			for(int i=1;i<=n;i++)
+			{
+				fact=fact*i;
+			}
+			out.println("fact of n is " + fact);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
+
+web.xml
+<servlet>
+	<display-name>Fact</display-name>
+	<servlet-name>Fact</servlet-name>
+	<servlet-class>perform.Fact</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Fact</servlet-name>
+	<url-pattern>/Fact</url-pattern>
+</servlet-mapping>
+
+
+index.html
+<html>
+<body>
+<form method="get" action="Fact">
+	Enter a Number: <input type="text" name="t1">
+	<input type="submit" value="Calculate factorial">
+</form>
+</body>
+</html>
+
+
+q3
+Practical3.java
+package demo;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class Practical3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out=null;
+		try {
+			out=response.getWriter();
+			float n =Float.parseFloat(request.getParameter("t1"));
+			float Fahrenheit;
+			Fahrenheit=((n*9)/5)+32;
+			out.println("    fahrenheit  " +Fahrenheit);
+		}catch(Exception e) {
+			out.println("Error:"+e.getMessage());
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+web.xml
+<servlet>
+    <display-name>Practical3</display-name>
+    <servlet-name>Practical3</servlet-name>
+    <servlet-class>demo.Practical3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Practical3</servlet-name>
+    <url-pattern>/Practical3</url-pattern>
+  </servlet-mapping>
+
+index.html
+<html>
+<body>
+	<form method=get action=Practical3>
+	Enter a Number:<input type=text name=t1>
+	<br>
+	<input type=submit value="Convert">
+	</form>
+</body>
+</html>
+
