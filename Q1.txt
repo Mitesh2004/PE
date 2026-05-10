@@ -1,0 +1,350 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+package com.webservice;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class FactorialService extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        int num = Integer.parseInt(request.getParameter("number"));
+
+        long fact = 1;
+
+        for(int i = 1; i <= num; i++) {
+            fact = fact * i;
+        }
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Factorial = " + fact + "</h2>");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factorial Service</title>
+</head>
+<body>
+
+<h2>Find Factorial</h2>
+
+<form action="FactorialService" method="post">
+
+    Enter Number :
+    <input type="text" name="number">
+
+    <input type="submit" value="Find">
+
+</form>
+
+</body>
+</html>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>FactorialService</servlet-name>
+        <servlet-class>com.webservice.FactorialService</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FactorialService</servlet-name>
+        <url-pattern>/FactorialService</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+package com.webservice;
+
+import java.io.*;
+import java.util.Date;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class GreetingService extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String name = request.getParameter("name");
+
+        Date d = new Date();
+
+        int hour = d.getHours();
+
+        String message = "";
+
+        if(hour < 12)
+            message = "Good Morning";
+        else if(hour < 17)
+            message = "Good Afternoon";
+        else
+            message = "Good Evening";
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>" + message + " " + name + "</h2>");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greeting Service</title>
+</head>
+<body>
+
+<h2>User Greeting</h2>
+
+<form action="GreetingService" method="post">
+
+    Enter Name :
+    <input type="text" name="name">
+
+    <input type="submit" value="Greet">
+
+</form>
+
+</body>
+</html>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>GreetingService</servlet-name>
+        <servlet-class>com.webservice.GreetingService</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GreetingService</servlet-name>
+        <url-pattern>/GreetingService</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+package com.webservice;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class WeightService extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        double kg = Double.parseDouble(request.getParameter("kg"));
+
+        double gram = kg * 1000;
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Weight in Gram = " + gram + "</h2>");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weight Converter</title>
+</head>
+<body>
+
+<h2>Kilogram to Gram Converter</h2>
+
+<form action="WeightService" method="post">
+
+    Enter Weight in KG :
+    <input type="text" name="kg">
+
+    <input type="submit" value="Convert">
+
+</form>
+
+</body>
+</html>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>WeightService</servlet-name>
+        <servlet-class>com.webservice.WeightService</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WeightService</servlet-name>
+        <url-pattern>/WeightService</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+package com.webservice;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class RectangleService extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        double length = Double.parseDouble(request.getParameter("length"));
+
+        double breadth = Double.parseDouble(request.getParameter("breadth"));
+
+        double height = Double.parseDouble(request.getParameter("height"));
+
+        double area = length * breadth;
+
+        double volume = length * breadth * height;
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Area = " + area + "</h2>");
+        out.println("<h2>Volume = " + volume + "</h2>");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rectangle Service</title>
+</head>
+<body>
+
+<h2>Area and Volume of Rectangle</h2>
+
+<form action="RectangleService" method="post">
+
+    Enter Length :
+    <input type="text" name="length">
+
+    <br><br>
+
+    Enter Breadth :
+    <input type="text" name="breadth">
+
+    <br><br>
+
+    Enter Height :
+    <input type="text" name="height">
+
+    <br><br>
+
+    <input type="submit" value="Calculate">
+
+</form>
+
+</body>
+</html>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>RectangleService</servlet-name>
+        <servlet-class>com.webservice.RectangleService</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RectangleService</servlet-name>
+        <url-pattern>/RectangleService</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+package com.webservice;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class VowelService extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String str = request.getParameter("text");
+
+        int count = 0;
+
+        str = str.toLowerCase();
+
+        for(int i = 0; i < str.length(); i++) {
+
+            char ch = str.charAt(i);
+
+            if(ch == 'a' || ch == 'e' || ch == 'i' ||
+               ch == 'o' || ch == 'u') {
+
+                count++;
+            }
+        }
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Number of Vowels = " + count + "</h2>");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vowel Counter</title>
+</head>
+<body>
+
+<h2>Find Number of Vowels</h2>
+
+<form action="VowelService" method="post">
+
+    Enter String :
+    <input type="text" name="text">
+
+    <input type="submit" value="Count Vowels">
+
+</form>
+
+</body>
+</html>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>VowelService</servlet-name>
+        <servlet-class>com.webservice.VowelService</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VowelService</servlet-name>
+        <url-pattern>/VowelService</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+///////////////////////////////////////////////////////////////////////////////////////////////////
