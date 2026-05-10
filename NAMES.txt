@@ -1,0 +1,13 @@
+| No | Project Name        | Package Name     | Class Name          |
+| -- | ------------------- | ---------------- | ------------------- |
+| 1  |  TempProject        |  com.webservice  |  TempService        |
+| 2  |  StationaryProject  |  --//--//--//--  |  StationaryService  |
+| 3  |  MobileProject      |  --//--//--//--  |  MobileService      |
+| 4  |  CurrencyProject    |  --//--//--//--  |  CurrencyService    |
+| 5  |  NumberProject      |  --//--//--//--  |  NumberService      |
+| 6  |  FactorialProject   |  --//--//--//--  |  FactorialService   |
+| 7  |  GreetingProject    |  --//--//--//--  |  GreetingService    |
+| 8  |  WeightProject      |  --//--//--//--  |  WeightService      |
+| 9  |  RectangleProject   |  --//--//--//--  |  RectangleService   |
+| 10 |  VowelProject       |  com.webservice  |  VowelService       |
+|----|---------------------|------------------|---------------------|
